@@ -22,7 +22,31 @@ const selectUserByID = ({ user_id }) => {
     });
 };
 
+const insertUser = ({ username, name, avatar_url, email, password }) => {
+  if (!username || !name || !avatar_url || !email || !password) {
+    return Promise.reject({
+      status: 400,
+      msg: 'bad request',
+    });
+  }
+
+  return connection
+    .insert({
+      username,
+      name,
+      avatar_url,
+      email,
+      password,
+    })
+    .into('users')
+    .returning('*')
+    .then((users) => {
+      return users[0];
+    });
+};
+
 module.exports = {
   selectUsers,
   selectUserByID,
+  insertUser,
 };

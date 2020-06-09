@@ -65,6 +65,84 @@ describe('/users', () => {
     });
   });
 
+  describe('POST', () => {
+    test('status 201 : responds with created user object', () => {
+      return request(app)
+        .post('/api/users')
+        .send({
+          username: 'unique-username',
+          name: 'full name',
+          avatar_url: 'avatar-url',
+          email: 'email@mail.com',
+          password: 'itsapassword',
+        })
+        .expect(201)
+        .then(({ body: { user } }) => {
+          expect(user).toEqual({
+            user_id: 4,
+            username: 'unique-username',
+            name: 'full name',
+            avatar_url: 'avatar-url',
+            email: 'email@mail.com',
+            password: 'itsapassword',
+          });
+        });
+    });
+
+    test('status:400 - invalid body, missing username key - responds with msg: "bad request"', () => {
+      return request(app)
+        .post('/api/users')
+        .send({
+          name: 'full name',
+          avatar_url: 'avatar-url',
+        })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
+
+    test('status:400 - invalid body, missing name key - responds with msg: "bad request"', () => {
+      return request(app)
+        .post('/api/users')
+        .send({
+          username: 'unique-username',
+          avatar_url: 'avatar-url',
+        })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
+
+    test('status:400 - invalid body, missing avatar_url key - responds with msg: "bad request"', () => {
+      return request(app)
+        .post('/api/users')
+        .send({
+          username: 'unique-username',
+          name: 'full name',
+        })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
+
+    test('status:400 - invalid body, existing username - responds with msg: "bad request"', () => {
+      return request(app)
+        .post('/api/users')
+        .send({
+          username: 'rogersop',
+          name: 'full name',
+          avatar_url: 'avatar-url',
+        })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
+  });
+
   describe('/:user_id', () => {
     test('status:405 - invalid method - responds with msg: "method not allowed"', () => {
       const invalidMethods = ['post', 'patch', 'put', 'delete'];
