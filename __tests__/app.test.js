@@ -64,4 +64,57 @@ describe('/users', () => {
         });
     });
   });
+
+  describe('/:user_id', () => {
+    test('status:405 - invalid method - responds with msg: "method not allowed"', () => {
+      const invalidMethods = ['post', 'patch', 'put', 'delete'];
+      const requests = invalidMethods.map((method) => {
+        return request(app)
+          [method]('/api/users/1')
+          .expect(405)
+          .then(({ body: { msg } }) => {
+            expect(msg).toBe('method not allowed');
+          });
+      });
+
+      return Promise.all(requests);
+    });
+
+    describe('GET', () => {
+      test('status:200 - responds with requested user object', () => {
+        return request(app)
+          .get('/api/users/1')
+          .expect(200)
+          .then(({ body: { user } }) => {
+            expect(user).toEqual({
+              user_id: 1,
+              username: 'butter_bridge',
+              name: 'jonny',
+              avatar_url:
+                'https://www.healthytherapies.com/wp-content/uploads/2016/06/Lime3.jpg',
+              email: 'butter_bridge@email.com',
+              password: 'abc123',
+            });
+          });
+      });
+
+      test('status:404 - non-existent username - responds with msg: "user not found"', () => {
+        return request(app)
+          .get('/api/users/100')
+          .expect(404)
+          .then(({ body: { msg } }) => {
+            expect(msg).toBe('user not found');
+          });
+      });
+
+      test('status:400 - non-existent username - responds with msg: "bad request"', () => {
+        return request(app)
+          .get('/api/users/notanumber')
+          .expect(400)
+          .then(({ body: { msg } }) => {
+            expect(msg).toBe('bad request');
+          });
+      });
+    });
+  });
 });
