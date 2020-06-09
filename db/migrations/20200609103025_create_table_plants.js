@@ -7,7 +7,7 @@ exports.up = function (knex) {
     plantsTable.text('soil').notNullable();
     plantsTable.boolean('directSunlight').notNullable();
     plantsTable.boolean('inside').notNullable();
-    plantsTable.text('wateringFreq').notNullable();
+    plantsTable.integer('wateringFreq').notNullable();
     plantsTable.timestamp('created_at').defaultTo(knex.fn.now());
   });
 };
