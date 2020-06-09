@@ -1,0 +1,5 @@
+DROP DATABASE IF EXISTS budding_test;
+DROP DATABASE IF EXISTS budding;
+
+CREATE DATABASE budding_test;
+CREATE DATABASE budding;
