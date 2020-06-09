@@ -95,6 +95,8 @@ describe('/users', () => {
         .send({
           name: 'full name',
           avatar_url: 'avatar-url',
+          email: 'email@mail.com',
+          password: 'itsapassword',
         })
         .expect(400)
         .then(({ body: { msg } }) => {
@@ -108,6 +110,8 @@ describe('/users', () => {
         .send({
           username: 'unique-username',
           avatar_url: 'avatar-url',
+          email: 'email@mail.com',
+          password: 'itsapassword',
         })
         .expect(400)
         .then(({ body: { msg } }) => {
@@ -121,6 +125,38 @@ describe('/users', () => {
         .send({
           username: 'unique-username',
           name: 'full name',
+          email: 'email@mail.com',
+          password: 'itsapassword',
+        })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
+
+    test('status:400 - invalid body, missing email key - responds with msg: "bad request"', () => {
+      return request(app)
+        .post('/api/users')
+        .send({
+          username: 'unique-username',
+          name: 'full name',
+          avatar_url: 'avatar-url',
+          password: 'itsapassword',
+        })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
+
+    test('status:400 - invalid body, missing password key - responds with msg: "bad request"', () => {
+      return request(app)
+        .post('/api/users')
+        .send({
+          username: 'unique-username',
+          name: 'full name',
+          avatar_url: 'avatar-url',
+          email: 'email@mail.com',
         })
         .expect(400)
         .then(({ body: { msg } }) => {
@@ -135,6 +171,8 @@ describe('/users', () => {
           username: 'rogersop',
           name: 'full name',
           avatar_url: 'avatar-url',
+          email: 'email@mail.com',
+          password: 'itsapassword',
         })
         .expect(400)
         .then(({ body: { msg } }) => {
