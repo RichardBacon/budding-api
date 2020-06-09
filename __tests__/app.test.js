@@ -214,7 +214,7 @@ describe('/users', () => {
           });
       });
 
-      test('status:404 - non-existent username - responds with msg: "user not found"', () => {
+      test('status:404 - non-existent user_id - responds with msg: "user not found"', () => {
         return request(app)
           .get('/api/users/100')
           .expect(404)
@@ -223,7 +223,7 @@ describe('/users', () => {
           });
       });
 
-      test('status:400 - non-existent username - responds with msg: "bad request"', () => {
+      test('status:400 - non-existent user_id - responds with msg: "bad request"', () => {
         return request(app)
           .get('/api/users/notanumber')
           .expect(400)
