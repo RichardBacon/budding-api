@@ -236,5 +236,14 @@ describe('/api/plants/:plant_id', () => {
           expect(msg).toBe('plant not found');
         });
     });
+
+    test('status:400 - invalid plant_id - responds with msg: "bad request"', () => {
+      return request(app)
+        .del('/api/plants/notANumber')
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
   });
 });
