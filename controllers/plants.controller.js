@@ -2,6 +2,8 @@ const { selectSnaps } = require('../models/snaps.model');
 const {
   selectPlantsByUserId,
   insertPlantByUserId,
+  updatePlantById,
+  removePlantById,
 } = require('../models/plants.model');
 
 const getSnapsByPlantId = (req, res, next) => {
@@ -28,4 +30,24 @@ const postPlantByUserId = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { getSnapsByPlantId, getPlantsByUserId, postPlantByUserId };
+const patchPlantById = (req, res, next) => {
+  updatePlantById(req.params, req.body)
+    .then((plant) => {
+      res.status(200).send({ plant });
+    })
+    .catch(next);
+};
+
+const deletePlantById = (req, res, next) => {
+  removePlantById(req.params).then(() => {
+    res.status(204).send();
+  });
+};
+
+module.exports = {
+  getSnapsByPlantId,
+  getPlantsByUserId,
+  postPlantByUserId,
+  patchPlantById,
+  deletePlantById,
+};

@@ -130,4 +130,36 @@ describe('/api/users/:user_id/plants', () => {
         });
     });
   });
+
+  describe('PATCH', () => {
+    test('status 200 : responds with a patched plant object', () => {
+      return request(app)
+        .patch('/api/plants/1')
+        .send({
+          plant_name: 'plant-name-test-change',
+          plant_type: 'vegetable',
+          soil: 'soil-test-change',
+          directSunlight: false,
+          inside: true,
+          wateringFreq: 4,
+        })
+        .expect(200)
+        .then(({ body: { plant } }) => {
+          expect(plant.plant_id).toBe(1);
+          expect(plant.plant_name).toBe('plant-name-test-change');
+          expect(plant.plant_type).toBe('vegetable');
+          expect(plant.soil).toBe('soil-test-change');
+          expect(plant.directSunlight).toBe(false);
+          expect(plant.inside).toBe(true);
+          expect(plant.wateringFreq).toBe(4);
+          expect(plant.created_at).not.toBe('Invalid Date');
+        });
+    });
+  });
+
+  describe('DELETE', () => {
+    test('DELETE 204 - Removes plants by id', () => {
+      return request(app).del('/api/plants/1').expect(204);
+    });
+  });
 });

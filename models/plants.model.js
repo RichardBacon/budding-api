@@ -47,7 +47,40 @@ const insertPlantByUserId = (
     });
 };
 
+const updatePlantById = (
+  { plant_id },
+  { plant_name, plant_type, soil, directSunlight, inside, wateringFreq },
+) => {
+  return connection('plants')
+    .update({
+      plant_name,
+      plant_type,
+      soil,
+      directSunlight,
+      inside,
+      wateringFreq,
+    })
+    .where({ plant_id })
+    .returning('*')
+    .then((plants) => {
+      return plants[0];
+    });
+};
+
+const removePlantById = ({ plant_id }) => {
+  return connection('plants')
+    .del()
+    .where({ plant_id })
+    .then((deletionCount) => {
+      if (deletionCount === 0) {
+        return Promise.reject({ status: 404, msg: 'plant not found' });
+      }
+    });
+};
+
 module.exports = {
   selectPlantsByUserId,
   insertPlantByUserId,
+  updatePlantById,
+  removePlantById,
 };
