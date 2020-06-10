@@ -33,5 +33,11 @@ describe('/', () => {
 
       return Promise.all(requests);
     });
+
+    describe('GET', () => {
+      test('status:200 - responds with description of endpoints', () => {
+        return request(app).get('/api').expect(200);
+      });
+    });
   });
 });
