@@ -9,7 +9,7 @@ afterAll(() => connection.destroy());
 
 describe('/api/users/:user_id/plants', () => {
   test('status:405 - invalid method - responds with msg: "method not allowed"', () => {
-    const invalidMethods = ['put'];
+    const invalidMethods = ['put', 'patch', 'delete'];
     const requests = invalidMethods.map((method) => {
       return request(app)
         [method]('/api/users/:user_id/plants')
