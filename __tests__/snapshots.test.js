@@ -65,4 +65,43 @@ describe('/api/plants/:plant_id/snapshots', () => {
         });
     });
   });
+  describe('POST', () => {
+    test('status:200 - responds with posted snapshot', () => {
+      return request(app)
+        .post('/api/plants/2/snapshots')
+        .send({
+          plant_id: 2,
+          plant_uri: 'plantURIlink.jpg',
+          no_leaves: 2,
+          height: 8,
+          created_at: 1416140518171,
+        })
+        .expect(200)
+        .then(({ body: { snap } }) => {
+          console.log(snap);
+          expect(typeof snap).toBe('object');
+          expect(snap.plant_id).toBe(2);
+          expect(typeof snap.snapshot_id).toBe('number');
+        });
+    });
+    test('status:400 - responds with bad request if missing required information', () => {
+      return request(app)
+        .post('/api/plants/2/snapshots')
+        .send({
+          plant_id: 2,
+          plant_uri: 'plantURIlink.jpg',
+          no_leaves: 2,
+          created_at: 1416140518171,
+        })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
+  });
+  describe('DELETE', () => {
+    test.only('status:204 - deletes snapshot', () => {
+      return request(app).delete('/api/snapshots/3').expect(204);
+    });
+  });
 });
