@@ -135,6 +135,15 @@ describe('/api/users/:user_id/plants', () => {
           expect(msg).toBe('bad request');
         });
     });
+
+    test('status:404 - non-existent plant_id - responds with msg: "plant not found"', () => {
+      return request(app)
+        .get('/api/users/7/plants')
+        .expect(404)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('plant not found');
+        });
+    });
   });
 
   describe('POST', () => {
