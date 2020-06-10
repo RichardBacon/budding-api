@@ -92,5 +92,16 @@ describe('/api/users/:user_id/plants', () => {
           expect(plants[0].snapshot_count).toBe('2');
         });
     });
+
+    test('status:200 - plants can be filtered by plant_type', () => {
+      return request(app)
+        .get('/api/users/1/plants?plant_type=indoor')
+        .expect(200)
+        .then(({ body: { plants } }) => {
+          plants.forEach((plant) => {
+            expect(plant.plant_type).toBe('indoor');
+          });
+        });
+    });
   });
 });
