@@ -35,6 +35,7 @@ describe('/api/users/:user_id/plants', () => {
               'inside',
               'wateringFreq',
               'created_at',
+              'snapshot_count',
             ]);
           });
         });
@@ -57,6 +58,18 @@ describe('/api/users/:user_id/plants', () => {
         .expect(200)
         .then(({ body: { plants } }) => {
           expect(plants).toBeSortedBy('created_at');
+        });
+    });
+
+    test('status:200 - each plant object has a snapshot_count key, value set to total count of comments with plant_id', () => {
+      return request(app)
+        .get('/api/users/1/plants')
+        .expect(200)
+        .then(({ body: { plants } }) => {
+          plants.forEach((plant) => {
+            expect(plant.snapshot_count).toEqual(expect.any(String));
+          });
+          expect(plants[0].snapshot_count).toBe('2');
         });
     });
   });
