@@ -53,7 +53,7 @@ describe('/users', () => {
   });
 
   describe('POST', () => {
-    test('status 201 : responds with created user object', () => {
+    test('status:201 responds with created user object', () => {
       return request(app)
         .post('/api/users')
         .send({
@@ -210,7 +210,7 @@ describe('/users', () => {
           });
       });
 
-      test('status:400 - non-existent user_id - responds with msg: "bad request"', () => {
+      test('status:400 - invalid user_id - responds with msg: "bad request"', () => {
         return request(app)
           .get('/api/users/notanumber')
           .expect(400)
