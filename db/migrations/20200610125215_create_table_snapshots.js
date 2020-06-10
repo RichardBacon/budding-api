@@ -4,7 +4,8 @@ exports.up = function (knex) {
     snapshotsTable
       .integer('plant_id')
       .references('plants.plant_id')
-      .notNullable();
+      .notNullable()
+      .onDelete('CASCADE');
     snapshotsTable.string('plant_uri').notNullable();
     snapshotsTable.integer('no_leaves');
     snapshotsTable.integer('height').notNullable();

@@ -92,5 +92,74 @@ describe('/api/users/:user_id/plants', () => {
           expect(plants[0].snapshot_count).toBe('2');
         });
     });
+
+    test('status:200 - plants can be filtered by plant_type', () => {
+      return request(app)
+        .get('/api/users/1/plants?plant_type=indoor')
+        .expect(200)
+        .then(({ body: { plants } }) => {
+          plants.forEach((plant) => {
+            expect(plant.plant_type).toBe('indoor');
+          });
+        });
+    });
+  });
+
+  describe('POST', () => {
+    test('status 201 : responds with created plant object', () => {
+      return request(app)
+        .post('/api/users/1/plants')
+        .send({
+          plant_name: 'plant-name-test',
+          plant_type: 'indoor',
+          soil: 'soil-test',
+          directSunlight: true,
+          inside: false,
+          wateringFreq: 2,
+        })
+        .expect(201)
+        .then(({ body: { plant } }) => {
+          expect(plant.plant_id).toBe(7);
+          expect(plant.plant_name).toBe('plant-name-test');
+          expect(plant.plant_type).toBe('indoor');
+          expect(plant.soil).toBe('soil-test');
+          expect(plant.directSunlight).toBe(true);
+          expect(plant.inside).toBe(false);
+          expect(plant.wateringFreq).toBe(2);
+          expect(plant.created_at).not.toBe('Invalid Date');
+        });
+    });
+  });
+
+  describe('PATCH', () => {
+    test('status 200 : responds with a patched plant object', () => {
+      return request(app)
+        .patch('/api/plants/1')
+        .send({
+          plant_name: 'plant-name-test-change',
+          plant_type: 'vegetable',
+          soil: 'soil-test-change',
+          directSunlight: false,
+          inside: true,
+          wateringFreq: 4,
+        })
+        .expect(200)
+        .then(({ body: { plant } }) => {
+          expect(plant.plant_id).toBe(1);
+          expect(plant.plant_name).toBe('plant-name-test-change');
+          expect(plant.plant_type).toBe('vegetable');
+          expect(plant.soil).toBe('soil-test-change');
+          expect(plant.directSunlight).toBe(false);
+          expect(plant.inside).toBe(true);
+          expect(plant.wateringFreq).toBe(4);
+          expect(plant.created_at).not.toBe('Invalid Date');
+        });
+    });
+  });
+
+  describe('DELETE', () => {
+    test('DELETE 204 - Removes plants by id', () => {
+      return request(app).del('/api/plants/1').expect(204);
+    });
   });
 });
