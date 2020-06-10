@@ -4,6 +4,13 @@ const selectPlantsByUserId = (
   { user_id },
   { sort_by = 'created_at', order = 'desc', plant_type },
 ) => {
+  if (order !== 'asc' && order !== 'desc') {
+    return Promise.reject({
+      status: 400,
+      msg: 'bad request',
+    });
+  }
+
   return connection
     .select('plants.*')
     .count('snapshots.snapshot_id AS snapshot_count')

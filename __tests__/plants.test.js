@@ -126,6 +126,15 @@ describe('/api/users/:user_id/plants', () => {
           expect(msg).toBe('bad request');
         });
     });
+
+    test('status:400 - invalid order query - responds with msg: "bad request"', () => {
+      return request(app)
+        .get('/api/users/1/plants?order=invalidQuery')
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
   });
 
   describe('POST', () => {
