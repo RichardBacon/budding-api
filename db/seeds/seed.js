@@ -1,4 +1,9 @@
-const { userData, plantData, snapshotData } = require('../data/index.js');
+const {
+  userData,
+  plantData,
+  snapshotData,
+  plantTypesData,
+} = require('../data/index.js');
 
 const { formatDates } = require('../utils/utils');
 
@@ -8,6 +13,9 @@ exports.seed = (knex) => {
     .then(() => knex.migrate.latest())
     .then(() => {
       return knex('users').insert(userData);
+    })
+    .then(() => {
+      return knex('plant_types').insert(plantTypesData);
     })
     .then(() => {
       const formattedPlantData = formatDates(plantData);
