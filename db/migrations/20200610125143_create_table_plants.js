@@ -3,7 +3,10 @@ exports.up = function (knex) {
     plantsTable.increments('plant_id');
     plantsTable.text('plant_name').notNullable();
     plantsTable.integer('user_id').references('users.user_id').notNullable();
-    plantsTable.text('type').notNullable();
+    plantsTable
+      .text('plant_type')
+      .references('plant_types.plant_type')
+      .notNullable();
     plantsTable.text('soil').notNullable();
     plantsTable.boolean('directSunlight').notNullable();
     plantsTable.boolean('inside').notNullable();

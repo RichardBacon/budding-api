@@ -5,11 +5,14 @@ const {
   getUserByID,
   postUser,
 } = require('../controllers/users.controller');
+const { getPlantsByUserId } = require('../controllers/plants.controller');
 
 const usersRouter = express.Router();
 
 usersRouter.route('/').get(getUsers).post(postUser).all(send405);
 
 usersRouter.route('/:user_id').get(getUserByID).all(send405);
+
+usersRouter.route('/:user_id/plants').get(getPlantsByUserId).all(send405);
 
 module.exports = { usersRouter };

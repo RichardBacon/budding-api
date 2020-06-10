@@ -2,7 +2,7 @@ module.exports = [
   {
     plant_name: 'plantName1',
     user_id: 1,
-    type: 'plantType1',
+    plant_type: 'indoor',
     soil: 'soil1',
     directSunlight: true,
     inside: false,
@@ -12,7 +12,7 @@ module.exports = [
   {
     plant_name: 'plantName2',
     user_id: 2,
-    type: 'plantType2',
+    plant_type: 'indoor',
     soil: 'soil2',
     directSunlight: true,
     inside: false,
@@ -22,7 +22,7 @@ module.exports = [
   {
     plant_name: 'plantName3',
     user_id: 3,
-    type: 'plantType3',
+    plant_type: 'indoor',
     soil: 'soil3',
     directSunlight: true,
     inside: false,
@@ -32,7 +32,7 @@ module.exports = [
   {
     plant_name: 'plantName4',
     user_id: 1,
-    type: 'plantType4',
+    plant_type: 'vegetable',
     soil: 'soil4',
     directSunlight: true,
     inside: false,
@@ -42,7 +42,7 @@ module.exports = [
   {
     plant_name: 'plantName5',
     user_id: 3,
-    type: 'plantType5',
+    plant_type: 'vegetable',
     soil: 'soil1',
     directSunlight: true,
     inside: false,
@@ -52,7 +52,7 @@ module.exports = [
   {
     plant_name: 'plantName6',
     user_id: 3,
-    type: 'plantType6',
+    plant_type: 'vegetable',
     soil: 'soil6',
     directSunlight: true,
     inside: false,
