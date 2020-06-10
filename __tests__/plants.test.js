@@ -227,5 +227,14 @@ describe('/api/plants/:plant_id', () => {
     test('DELETE 204 - Removes plants by id', () => {
       return request(app).del('/api/plants/1').expect(204);
     });
+
+    test('status:404 - non-existent plant_id - responds with msg: "plant not found"', () => {
+      return request(app)
+        .del('/api/plants/7')
+        .expect(404)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('plant not found');
+        });
+    });
   });
 });

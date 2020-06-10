@@ -39,9 +39,11 @@ const patchPlantById = (req, res, next) => {
 };
 
 const deletePlantById = (req, res, next) => {
-  removePlantById(req.params).then(() => {
-    res.status(204).send();
-  });
+  removePlantById(req.params)
+    .then(() => {
+      res.status(204).send();
+    })
+    .catch(next);
 };
 
 module.exports = {
