@@ -82,6 +82,8 @@ const removePlantById = ({ plant_id }) => {
       if (deletionCount === 0) {
         return Promise.reject({ status: 404, msg: 'plant not found' });
       }
+
+      return Promise.resolve();
     });
 };
 
