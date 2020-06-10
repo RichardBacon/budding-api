@@ -211,14 +211,16 @@ describe('/api/plants/:plant_id', () => {
         })
         .expect(200)
         .then(({ body: { plant } }) => {
-          expect(plant.plant_id).toBe(1);
-          expect(plant.plant_name).toBe('plant-name-test-change');
-          expect(plant.plant_type).toBe('vegetable');
-          expect(plant.soil).toBe('soil-test-change');
-          expect(plant.directSunlight).toBe(false);
-          expect(plant.inside).toBe(true);
-          expect(plant.wateringFreq).toBe(4);
-          expect(plant.created_at).not.toBe('Invalid Date');
+          expect(plant).toContainEntries([
+            ['plant_id', 1],
+            ['plant_name', 'plant-name-test-change'],
+            ['plant_type', 'vegetable'],
+            ['soil', 'soil-test-change'],
+            ['directSunlight', false],
+            ['inside', true],
+            ['wateringFreq', 4],
+            ['created_at', new Date(1416140514171).toISOString()],
+          ]);
         });
     });
   });
