@@ -8,6 +8,20 @@ beforeEach(() => connection.seed.run());
 afterAll(() => connection.destroy());
 
 describe('/api/users/:user_id/plants', () => {
+  test('status:405 - invalid method - responds with msg: "method not allowed"', () => {
+    const invalidMethods = ['put'];
+    const requests = invalidMethods.map((method) => {
+      return request(app)
+        [method]('/api/users/:user_id/plants')
+        .expect(405)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('method not allowed');
+        });
+    });
+
+    return Promise.all(requests);
+  });
+
   describe('GET', () => {
     test('status:200 - responds with array of plant objects', () => {
       return request(app)
