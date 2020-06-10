@@ -50,5 +50,14 @@ describe('/api/users/:user_id/plants', () => {
           });
         });
     });
+
+    test('status:200 - plants can be sorted by created_at, ascending', () => {
+      return request(app)
+        .get('/api/users/1/plants?order=asc')
+        .expect(200)
+        .then(({ body: { plants } }) => {
+          expect(plants).toBeSortedBy('created_at');
+        });
+    });
   });
 });
