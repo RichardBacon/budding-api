@@ -117,6 +117,15 @@ describe('/api/users/:user_id/plants', () => {
           });
         });
     });
+
+    test('status:400 - invalid sort_by query - responds with msg: "bad request"', () => {
+      return request(app)
+        .get('/api/users/1/plants?sort_by=invalidQuery')
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
   });
 
   describe('POST', () => {
