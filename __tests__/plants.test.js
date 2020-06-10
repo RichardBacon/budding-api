@@ -39,5 +39,16 @@ describe('/api/users/:user_id/plants', () => {
           });
         });
     });
+
+    test('status:200 - plants are sorted by created_at, descending by default', () => {
+      return request(app)
+        .get('/api/users/1/plants')
+        .expect(200)
+        .then(({ body: { plants } }) => {
+          expect(plants).toBeSortedBy('created_at', {
+            descending: true,
+          });
+        });
+    });
   });
 });
