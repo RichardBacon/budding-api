@@ -18,4 +18,20 @@ describe('/', () => {
         });
     });
   });
+
+  describe('/api', () => {
+    test('status:405 - invalid method - responds with msg: "method not allowed"', () => {
+      const invalidMethods = ['post', 'patch', 'put', 'delete'];
+      const requests = invalidMethods.map((method) => {
+        return request(app)
+          [method]('/api')
+          .expect(405)
+          .then(({ body: { msg } }) => {
+            expect(msg).toBe('method not allowed');
+          });
+      });
+
+      return Promise.all(requests);
+    });
+  });
 });
