@@ -2,7 +2,7 @@ exports.up = function (knex) {
   return knex.schema.createTable('plants', (plantsTable) => {
     plantsTable.increments('plant_id');
     plantsTable.text('plant_name').notNullable();
-    plantsTable.integer('owner_id').references('users.user_id').notNullable();
+    plantsTable.integer('user_id').references('users.user_id').notNullable();
     plantsTable.text('type').notNullable();
     plantsTable.text('soil').notNullable();
     plantsTable.boolean('directSunlight').notNullable();

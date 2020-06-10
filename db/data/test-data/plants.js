@@ -1,7 +1,7 @@
 module.exports = [
   {
     plant_name: 'plantName1',
-    owner_id: 1,
+    user_id: 1,
     type: 'plantType1',
     soil: 'soil1',
     directSunlight: true,
@@ -11,7 +11,7 @@ module.exports = [
   },
   {
     plant_name: 'plantName2',
-    owner_id: 2,
+    user_id: 2,
     type: 'plantType2',
     soil: 'soil2',
     directSunlight: true,
@@ -21,7 +21,7 @@ module.exports = [
   },
   {
     plant_name: 'plantName3',
-    owner_id: 3,
+    user_id: 3,
     type: 'plantType3',
     soil: 'soil3',
     directSunlight: true,
@@ -31,7 +31,7 @@ module.exports = [
   },
   {
     plant_name: 'plantName4',
-    owner_id: 1,
+    user_id: 1,
     type: 'plantType4',
     soil: 'soil4',
     directSunlight: true,
@@ -41,7 +41,7 @@ module.exports = [
   },
   {
     plant_name: 'plantName5',
-    owner_id: 3,
+    user_id: 3,
     type: 'plantType5',
     soil: 'soil1',
     directSunlight: true,
@@ -51,7 +51,7 @@ module.exports = [
   },
   {
     plant_name: 'plantName6',
-    owner_id: 3,
+    user_id: 3,
     type: 'plantType6',
     soil: 'soil6',
     directSunlight: true,
