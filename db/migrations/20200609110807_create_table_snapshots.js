@@ -6,7 +6,7 @@ exports.up = function (knex) {
       .references('plants.plant_id')
       .notNullable();
     snapshotsTable.string('plant_uri').notNullable();
-    snapshotsTable.integer('no_leaves').notNullable();
+    snapshotsTable.integer('no_leaves');
     snapshotsTable.integer('height').notNullable();
     snapshotsTable.timestamp('created_at').defaultTo(knex.fn.now());
   });
