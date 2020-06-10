@@ -29,7 +29,7 @@ describe('/api/users/:user_id/plants', () => {
               'plant_id',
               'plant_name',
               'user_id',
-              'type',
+              'plant_type',
               'soil',
               'directSunlight',
               'inside',
@@ -58,6 +58,26 @@ describe('/api/users/:user_id/plants', () => {
         .expect(200)
         .then(({ body: { plants } }) => {
           expect(plants).toBeSortedBy('created_at');
+        });
+    });
+
+    test('status:200 - plants can be sorted by snapshot_count, descending', () => {
+      return request(app)
+        .get('/api/users/1/plants?sort_by=snapshot_count')
+        .expect(200)
+        .then(({ body: { plants } }) => {
+          expect(plants).toBeSortedBy('snapshot_count', {
+            descending: true,
+          });
+        });
+    });
+
+    test('status:200 - plants can be sorted by snapshot_count, ascending', () => {
+      return request(app)
+        .get('/api/users/1/plants?sort_by=snapshot_count&order=asc')
+        .expect(200)
+        .then(({ body: { plants } }) => {
+          expect(plants).toBeSortedBy('snapshot_count');
         });
     });
 
