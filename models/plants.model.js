@@ -22,11 +22,32 @@ const selectPlantsByUserId = (
           msg: 'plant not found',
         });
       }
-
       return plants;
+    });
+};
+
+const insertPlantByUserId = (
+  { user_id },
+  { plant_name, plant_type, soil, directSunlight, inside, wateringFreq },
+) => {
+  return connection
+    .insert({
+      plant_name,
+      user_id,
+      plant_type,
+      soil,
+      directSunlight,
+      inside,
+      wateringFreq,
+    })
+    .into('plants')
+    .returning('*')
+    .then((plants) => {
+      return plants[0];
     });
 };
 
 module.exports = {
   selectPlantsByUserId,
+  insertPlantByUserId,
 };

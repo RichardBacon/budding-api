@@ -104,4 +104,30 @@ describe('/api/users/:user_id/plants', () => {
         });
     });
   });
+
+  describe('POST', () => {
+    test('status 201 : responds with created plant object', () => {
+      return request(app)
+        .post('/api/users/1/plants')
+        .send({
+          plant_name: 'plant-name-test',
+          plant_type: 'indoor',
+          soil: 'soil-test',
+          directSunlight: true,
+          inside: false,
+          wateringFreq: 2,
+        })
+        .expect(201)
+        .then(({ body: { plant } }) => {
+          expect(plant.plant_id).toBe(7);
+          expect(plant.plant_name).toBe('plant-name-test');
+          expect(plant.plant_type).toBe('indoor');
+          expect(plant.soil).toBe('soil-test');
+          expect(plant.directSunlight).toBe(true);
+          expect(plant.inside).toBe(false);
+          expect(plant.wateringFreq).toBe(2);
+          expect(plant.created_at).not.toBe('Invalid Date');
+        });
+    });
+  });
 });
