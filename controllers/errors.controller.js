@@ -7,7 +7,6 @@ const send405 = (req, res, next) => {
 };
 
 const handlePSQLErrors = (err, req, res, next) => {
-  console.log(err);
   const codes = {
     '22P02': { status: 400, msg: 'bad request' },
     '23503': { status: 400, msg: 'bad request' },
