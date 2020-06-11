@@ -259,6 +259,18 @@ describe('/api/plants/:plant_id', () => {
         });
     });
 
+    test('status:400 - invalid body', () => {
+      return request(app)
+        .patch('/api/plants/1')
+        .send({
+          potHeight: 'abc',
+        })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
+
     test('status:404 - non-existent plant_id - responds with msg: "plant not found"', () => {
       return request(app)
         .patch('/api/plants/7')
