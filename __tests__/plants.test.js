@@ -246,7 +246,7 @@ describe('/api/users/:user_id/plants', () => {
 
 describe('/api/plants/:plant_id', () => {
   test('status:405 - invalid method - responds with msg: "method not allowed"', () => {
-    const invalidMethods = ['get', 'post', 'put'];
+    const invalidMethods = ['post', 'put'];
     const requests = invalidMethods.map((method) => {
       return request(app)
         [method]('/api/plants/:plant_id')

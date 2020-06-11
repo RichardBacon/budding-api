@@ -2,11 +2,8 @@ const express = require('express');
 const { send405 } = require('../controllers/errors.controller');
 const { usersRouter } = require('./users.router.js');
 const { plantsRouter } = require('./plants.router.js');
-<<<<<<< HEAD
 const { snapsRouter } = require('./snaps.router.js');
-=======
 const endpoints = require('../endpoints.json');
->>>>>>> e845fb2aed9f95b3cc215535c2756c1e8b8bfb2f
 
 const apiRouter = express.Router();
 
