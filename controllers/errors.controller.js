@@ -1,8 +1,8 @@
-const send404 = (req, res, next) => {
+const send404 = (req, res) => {
   res.status(404).send({ msg: 'resource not found' });
 };
 
-const send405 = (req, res, next) => {
+const send405 = (req, res) => {
   res.status(405).send({ msg: 'method not allowed' });
 };
 
@@ -30,7 +30,8 @@ const handleCustomErrors = (err, req, res, next) => {
   } else next(err);
 };
 
-const handleInternalErrors = (err, req, res, next) => {
+const handleInternalErrors = (err, req, res) => {
+  // eslint-disable-next-line no-console
   console.log('unhandled error:', err);
   res.status(500).send({ msg: 'internal server error' });
 };
