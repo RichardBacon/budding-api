@@ -258,6 +258,40 @@ describe('/api/plants/:plant_id', () => {
           ]);
         });
     });
+
+    test('status:404 - non-existent plant_id - responds with msg: "plant not found"', () => {
+      return request(app)
+        .patch('/api/plants/7')
+        .expect(404)
+        .send({
+          plant_name: 'plant-name-test-change',
+          plant_type: 'vegetable',
+          soil: 'soil-test-change',
+          directSunlight: false,
+          inside: true,
+          wateringFreq: 4,
+        })
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('plant not found');
+        });
+    });
+
+    test('status:400 - invalid plant_id - responds with msg: "bad request"', () => {
+      return request(app)
+        .patch('/api/plants/notANumber')
+        .send({
+          plant_name: 'plant-name-test-change',
+          plant_type: 'vegetable',
+          soil: 'soil-test-change',
+          directSunlight: false,
+          inside: true,
+          wateringFreq: 4,
+        })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
   });
 
   describe('DELETE', () => {
