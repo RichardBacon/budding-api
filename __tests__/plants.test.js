@@ -44,6 +44,8 @@ describe('/api/users/:user_id/plants', () => {
               'plant_name',
               'user_id',
               'plant_type',
+              'plant_variety',
+              'potHeight',
               'soil',
               'directSunlight',
               'inside',
@@ -166,12 +168,16 @@ describe('/api/users/:user_id/plants', () => {
           directSunlight: true,
           inside: false,
           wateringFreq: 2,
+          plant_variety: 'tomato',
+          potHeight: 10.5,
         })
         .expect(201)
         .then(({ body: { plant } }) => {
           expect(plant.plant_id).toBe(7);
           expect(plant.plant_name).toBe('plant-name-test');
           expect(plant.plant_type).toBe('indoor');
+          expect(plant.plant_variety).toBe('tomato');
+          expect(plant.potHeight).toBe('10.50');
           expect(plant.soil).toBe('soil-test');
           expect(plant.directSunlight).toBe(true);
           expect(plant.inside).toBe(false);
@@ -198,7 +204,7 @@ describe('/api/plants/:plant_id', () => {
   });
 
   describe('PATCH', () => {
-    test('status 200 : responds with a patched plant object', () => {
+    test('status:200 - responds with a patched plant object', () => {
       return request(app)
         .patch('/api/plants/1')
         .send({
@@ -213,6 +219,7 @@ describe('/api/plants/:plant_id', () => {
         .then(({ body: { plant } }) => {
           expect(plant).toContainEntries([
             ['plant_id', 1],
+            ['user_id', 1],
             ['plant_name', 'plant-name-test-change'],
             ['plant_type', 'vegetable'],
             ['soil', 'soil-test-change'],

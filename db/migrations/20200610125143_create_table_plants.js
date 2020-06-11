@@ -7,6 +7,8 @@ exports.up = function (knex) {
       .text('plant_type')
       .references('plant_types.plant_type')
       .notNullable();
+    plantsTable.text('plant_variety').notNullable();
+    plantsTable.decimal('potHeight').notNullable();
     plantsTable.text('soil').notNullable();
     plantsTable.boolean('directSunlight').notNullable();
     plantsTable.boolean('inside').notNullable();

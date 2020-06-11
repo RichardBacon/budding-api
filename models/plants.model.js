@@ -35,7 +35,16 @@ const selectPlantsByUserId = (
 
 const insertPlantByUserId = (
   { user_id },
-  { plant_name, plant_type, soil, directSunlight, inside, wateringFreq },
+  {
+    plant_name,
+    plant_type,
+    soil,
+    directSunlight,
+    inside,
+    wateringFreq,
+    plant_variety,
+    potHeight,
+  },
 ) => {
   return connection
     .insert({
@@ -46,6 +55,8 @@ const insertPlantByUserId = (
       directSunlight,
       inside,
       wateringFreq,
+      plant_variety,
+      potHeight,
     })
     .into('plants')
     .returning('*')
@@ -58,18 +69,40 @@ const updatePlantById = (
   { plant_id },
   { plant_name, plant_type, soil, directSunlight, inside, wateringFreq },
 ) => {
+  if (
+    !plant_name &&
+    !plant_type &&
+    !soil &&
+    directSunlight === null &&
+    inside === null &&
+    !wateringFreq
+  ) {
+    return Promise.reject({
+      status: 400,
+      msg: 'bad request',
+    });
+  }
+
   return connection('plants')
-    .update({
-      plant_name,
-      plant_type,
-      soil,
-      directSunlight,
-      inside,
-      wateringFreq,
+    .modify((query) => {
+      if (plant_name) query.update('plant_name', plant_name);
+      if (plant_type) query.update('plant_type', plant_type);
+      if (soil) query.update('soil', soil);
+      if (directSunlight !== null)
+        query.update('directSunlight', directSunlight);
+      if (inside !== null) query.update('inside', inside);
+      if (wateringFreq) query.update('wateringFreq', wateringFreq);
     })
     .where({ plant_id })
     .returning('*')
     .then((plants) => {
+      if (plants.length === 0) {
+        return Promise.reject({
+          status: 404,
+          msg: 'plant not found',
+        });
+      }
+
       return plants[0];
     });
 };
