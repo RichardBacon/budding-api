@@ -70,7 +70,6 @@ describe('/api/plants/:plant_id/snapshots', () => {
       return request(app)
         .post('/api/plants/2/snapshots')
         .send({
-          plant_id: 2,
           plant_uri: 'plantURIlink.jpg',
           no_leaves: 2,
           height: 8,
@@ -78,7 +77,6 @@ describe('/api/plants/:plant_id/snapshots', () => {
         })
         .expect(200)
         .then(({ body: { snap } }) => {
-          console.log(snap);
           expect(typeof snap).toBe('object');
           expect(snap.plant_id).toBe(2);
           expect(typeof snap.snapshot_id).toBe('number');
@@ -88,7 +86,34 @@ describe('/api/plants/:plant_id/snapshots', () => {
       return request(app)
         .post('/api/plants/2/snapshots')
         .send({
-          plant_id: 2,
+          plant_uri: 'plantURIlink.jpg',
+          no_leaves: 2,
+          created_at: 1416140518171,
+        })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
+    test('status:404 - responds with plant not found if plant does not exist', () => {
+      return request(app)
+        .post('/api/plants/1000/snapshots')
+        .send({
+          height: 5,
+          plant_uri: 'plantURIlink.jpg',
+          no_leaves: 2,
+          created_at: 1416140518171,
+        })
+        .expect(404)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('plant not found');
+        });
+    });
+    test('status:400 - responds with bad request if invalid plant_id', () => {
+      return request(app)
+        .post('/api/plants/notanumber/snapshots')
+        .send({
+          height: 5,
           plant_uri: 'plantURIlink.jpg',
           no_leaves: 2,
           created_at: 1416140518171,
@@ -99,9 +124,66 @@ describe('/api/plants/:plant_id/snapshots', () => {
         });
     });
   });
+  test('405: invalid method', () => {
+    const invalidMethods = ['patch', 'put', 'delete'];
+    const methodPromises = invalidMethods.map((method) => {
+      return request(app)
+        [method]('/api/plants/1/snapshots')
+        .expect(405)
+        .then(({ body }) => {
+          expect(body.msg).toBe('method not allowed');
+        });
+    });
+    return Promise.all(methodPromises);
+  });
+});
+describe('/api/snapshots/:snapshot_id', () => {
   describe('DELETE', () => {
-    test.only('status:204 - deletes snapshot', () => {
+    test('status:204 - deletes snapshot', () => {
       return request(app).delete('/api/snapshots/3').expect(204);
+    });
+    test('status:404 - snapshot not found', () => {
+      return request(app)
+        .delete('/api/snapshots/1000')
+        .expect(404)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('snapshot not found');
+        });
+    });
+    test('status:400 - response with bad request if invalid snapshot_id', () => {
+      return request(app)
+        .delete('/api/snapshots/notanumber')
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
+    test('405: invalid method', () => {
+      const invalidMethods = ['get', 'post', 'patch', 'put'];
+      const methodPromises = invalidMethods.map((method) => {
+        return request(app)
+          [method]('/api/snapshots/1')
+          .expect(405)
+          .then(({ body }) => {
+            expect(body.msg).toBe('method not allowed');
+          });
+      });
+      return Promise.all(methodPromises);
     });
   });
 });
+
+/*
+test('405: invalid method', () => {
+            const invalidMethods = ['post', 'patch', 'delete', 'put'];
+            const methodPromises = invalidMethods.map((method) => {
+                return request(app)
+                [method]('/api/topics')
+                .expect(405)
+                .then(({body}) => {
+                    expect(body.msg).toBe('Invalid method');
+                })
+            })
+            return Promise.all(methodPromises);
+        })
+*/

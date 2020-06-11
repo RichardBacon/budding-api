@@ -20,17 +20,24 @@ const insertSnapByPlantId = (params, body) => {
   const { plant_id } = params;
   const { plant_uri, no_leaves, height } = body;
   if ((plant_uri, height, plant_id)) {
-    return connection('snapshots')
-      .insert([{ plant_id, plant_uri, no_leaves, height }])
+    return connection('plants')
+      .select('*')
       .where({ plant_id })
-      .returning('*');
+      .then((plant) => {
+        if (plant.length === 0) {
+          return Promise.reject({ status: 404, msg: 'plant not found' });
+        }
+        return connection('snapshots')
+          .insert([{ plant_id, plant_uri, no_leaves, height }])
+          .where({ plant_id })
+          .returning('*');
+      });
   } else {
     return Promise.reject({ status: 400, msg: 'bad request' });
   }
 };
 
 const removeSnapBySnapId = ({ snapshot_id }) => {
-  console.log('inside snap model', snapshot_id);
   return connection('snapshots')
     .where({ snapshot_id })
     .then((snap) => {
