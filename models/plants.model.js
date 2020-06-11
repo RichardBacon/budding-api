@@ -67,22 +67,17 @@ const insertPlantByUserId = (
 
 const updatePlantById = (
   { plant_id },
-  { plant_name, plant_type, soil, directSunlight, inside, wateringFreq },
+  {
+    plant_name,
+    plant_type,
+    soil,
+    directSunlight,
+    inside,
+    wateringFreq,
+    plant_variety,
+    potHeight,
+  },
 ) => {
-  if (
-    !plant_name &&
-    !plant_type &&
-    !soil &&
-    directSunlight === null &&
-    inside === null &&
-    !wateringFreq
-  ) {
-    return Promise.reject({
-      status: 400,
-      msg: 'bad request',
-    });
-  }
-
   return connection('plants')
     .modify((query) => {
       if (plant_name) query.update('plant_name', plant_name);
@@ -92,6 +87,8 @@ const updatePlantById = (
         query.update('directSunlight', directSunlight);
       if (inside !== null) query.update('inside', inside);
       if (wateringFreq) query.update('wateringFreq', wateringFreq);
+      if (plant_variety) query.update('plant_variety', plant_variety);
+      if (potHeight) query.update('potHeight', potHeight);
     })
     .where({ plant_id })
     .returning('*')

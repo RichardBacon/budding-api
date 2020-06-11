@@ -214,6 +214,8 @@ describe('/api/plants/:plant_id', () => {
           directSunlight: false,
           inside: true,
           wateringFreq: 4,
+          plant_variety: 'tomato',
+          potHeight: 10.5,
         })
         .expect(200)
         .then(({ body: { plant } }) => {
@@ -224,8 +226,34 @@ describe('/api/plants/:plant_id', () => {
             ['plant_type', 'vegetable'],
             ['soil', 'soil-test-change'],
             ['directSunlight', false],
+            ['plant_variety', 'tomato'],
+            ['potHeight', '10.50'],
             ['inside', true],
             ['wateringFreq', 4],
+            ['created_at', new Date(1416140514171).toISOString()],
+          ]);
+        });
+    });
+
+    test('status:200 - responds with a patched plant object with one element updated', () => {
+      return request(app)
+        .patch('/api/plants/1')
+        .send({
+          potHeight: 15.5,
+        })
+        .expect(200)
+        .then(({ body: { plant } }) => {
+          expect(plant).toContainEntries([
+            ['plant_id', 1],
+            ['user_id', 1],
+            ['plant_name', 'plantName1'],
+            ['plant_type', 'indoor'],
+            ['soil', 'soil1'],
+            ['directSunlight', true],
+            ['inside', false],
+            ['wateringFreq', 2],
+            ['plant_variety', 'potatoe'],
+            ['potHeight', '15.50'],
             ['created_at', new Date(1416140514171).toISOString()],
           ]);
         });
