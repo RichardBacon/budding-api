@@ -185,6 +185,62 @@ describe('/api/users/:user_id/plants', () => {
           expect(plant.created_at).not.toBe('Invalid Date');
         });
     });
+
+    test('status:404 - non-existent user_id - responds with msg: "user not found"', () => {
+      return request(app)
+        .post('/api/users/1000/plants')
+        .expect(404)
+        .send({
+          plant_name: 'plant-name-test',
+          plant_type: 'indoor',
+          soil: 'soil-test',
+          directSunlight: true,
+          inside: false,
+          wateringFreq: 2,
+          plant_variety: 'tomato',
+          potHeight: 10.5,
+        })
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('user not found');
+        });
+    });
+
+    test('status:400 - missing input - responds with msg: "bad request"', () => {
+      return request(app)
+        .post('/api/users/1/plants')
+        .expect(400)
+        .send({
+          plant_name: 'plant-name-test',
+          plant_type: 'indoor',
+          directSunlight: true,
+          inside: false,
+          wateringFreq: 2,
+          plant_variety: 'tomato',
+          potHeight: 10.5,
+        })
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
+
+    test('status:400 - inavlid user_id - responds with msg: "bad request"', () => {
+      return request(app)
+        .post('/api/users/notanumber/plants')
+        .expect(400)
+        .send({
+          plant_name: 'plant-name-test',
+          plant_type: 'indoor',
+          soil: 'soil-test',
+          directSunlight: true,
+          inside: false,
+          wateringFreq: 2,
+          plant_variety: 'tomato',
+          potHeight: 10.5,
+        })
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
   });
 });
 

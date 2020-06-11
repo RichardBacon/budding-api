@@ -46,21 +46,56 @@ const insertPlantByUserId = (
     potHeight,
   },
 ) => {
+  if (
+    !plant_name ||
+    !plant_type ||
+    !soil ||
+    !wateringFreq ||
+    !plant_variety ||
+    !potHeight
+  ) {
+    return Promise.reject({
+      status: 400,
+      msg: 'bad request',
+    });
+  }
+
   return connection
-    .insert({
-      plant_name,
-      user_id,
-      plant_type,
-      soil,
-      directSunlight,
-      inside,
-      wateringFreq,
-      plant_variety,
-      potHeight,
+    .select('users.user_id')
+    .from('users')
+    .modify((query) => {
+      if (user_id) query.where('user_id', user_id);
     })
-    .into('plants')
-    .returning('*')
+    .then((users) => {
+      if (users.length === 0) {
+        return Promise.reject({
+          status: 404,
+          msg: 'user not found',
+        });
+      }
+
+      return connection
+        .insert({
+          plant_name,
+          user_id,
+          plant_type,
+          soil,
+          directSunlight,
+          inside,
+          wateringFreq,
+          plant_variety,
+          potHeight,
+        })
+        .into('plants')
+        .returning('*');
+    })
     .then((plants) => {
+      if (plants.length === 0) {
+        return Promise.reject({
+          status: 404,
+          msg: 'user not found',
+        });
+      }
       return plants[0];
     });
 };
