@@ -1,5 +1,8 @@
 const { selectSnaps, insertSnapByPlantId } = require('../models/snaps.model');
-const { selectPlantsByUserId } = require('../models/plants.model');
+const {
+  selectPlantsByUserId,
+  selectPlantById,
+} = require('../models/plants.model');
 
 const getSnapsByPlantId = (req, res, next) => {
   selectSnaps(req.params)
@@ -17,6 +20,14 @@ const getPlantsByUserId = (req, res, next) => {
     .catch(next);
 };
 
+const getPlantById = (req, res, next) => {
+  selectPlantById(req.params)
+    .then(([plant]) => {
+      res.status(200).send({ plant });
+    })
+    .catch(next);
+};
+
 const postSnapByPlantId = (req, res, next) => {
   insertSnapByPlantId(req.params, req.body)
     .then(([snap]) => {
@@ -25,4 +36,9 @@ const postSnapByPlantId = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { getSnapsByPlantId, getPlantsByUserId, postSnapByPlantId };
+module.exports = {
+  getSnapsByPlantId,
+  getPlantsByUserId,
+  getPlantById,
+  postSnapByPlantId,
+};

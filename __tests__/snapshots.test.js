@@ -172,18 +172,3 @@ describe('/api/snapshots/:snapshot_id', () => {
     });
   });
 });
-
-/*
-test('405: invalid method', () => {
-            const invalidMethods = ['post', 'patch', 'delete', 'put'];
-            const methodPromises = invalidMethods.map((method) => {
-                return request(app)
-                [method]('/api/topics')
-                .expect(405)
-                .then(({body}) => {
-                    expect(body.msg).toBe('Invalid method');
-                })
-            })
-            return Promise.all(methodPromises);
-        })
-*/
