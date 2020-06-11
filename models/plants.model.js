@@ -26,6 +26,23 @@ const selectPlantsByUserId = (
     });
 };
 
+const selectPlantById = ({ plant_id }) => {
+  return connection
+    .select('*')
+    .from('plants')
+    .where({ plant_id })
+    .then((plant) => {
+      if (plant.length === 0) {
+        return Promise.reject({
+          status: 404,
+          msg: 'plant not found',
+        });
+      }
+      return plant;
+    });
+};
+
 module.exports = {
   selectPlantsByUserId,
+  selectPlantById,
 };

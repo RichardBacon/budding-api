@@ -12,6 +12,7 @@ const handlePSQLErrors = (err, req, res, next) => {
     '23503': { status: 400, msg: 'bad request' },
     '23505': { status: 400, msg: 'bad request' },
     '42703': { status: 400, msg: 'bad request' },
+    '23502': { status: 400, msg: 'bad request' },
   };
 
   if (err.code in codes) {
