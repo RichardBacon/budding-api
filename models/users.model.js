@@ -22,8 +22,8 @@ const selectUserByID = ({ user_id }) => {
     });
 };
 
-const insertUser = ({ username, name, avatar_url, email, password }) => {
-  if (!username || !name || !avatar_url || !email || !password) {
+const insertUser = ({ username, name, avatar_url, password }) => {
+  if (!username || !name || !avatar_url || !password) {
     return Promise.reject({
       status: 400,
       msg: 'bad request',
@@ -35,7 +35,6 @@ const insertUser = ({ username, name, avatar_url, email, password }) => {
       username,
       name,
       avatar_url,
-      email,
       password,
     })
     .into('users')
