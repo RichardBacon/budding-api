@@ -45,11 +45,11 @@ describe('/api/users/:user_id/plants', () => {
               'user_id',
               'plant_type',
               'plant_variety',
-              'potHeight',
+              'pot_height',
               'soil',
-              'directSunlight',
+              'direct_sunlight',
               'inside',
-              'wateringFreq',
+              'watering_freq',
               'created_at',
               'snapshot_count',
             ]);
@@ -165,11 +165,11 @@ describe('/api/users/:user_id/plants', () => {
           plant_name: 'plant-name-test',
           plant_type: 'indoor',
           soil: 'soil-test',
-          directSunlight: true,
+          direct_sunlight: true,
           inside: false,
-          wateringFreq: 2,
+          watering_freq: 2,
           plant_variety: 'tomato',
-          potHeight: 10.5,
+          pot_height: 10.5,
         })
         .expect(201)
         .then(({ body: { plant } }) => {
@@ -177,11 +177,11 @@ describe('/api/users/:user_id/plants', () => {
           expect(plant.plant_name).toBe('plant-name-test');
           expect(plant.plant_type).toBe('indoor');
           expect(plant.plant_variety).toBe('tomato');
-          expect(plant.potHeight).toBe('10.50');
+          expect(plant.pot_height).toBe('10.50');
           expect(plant.soil).toBe('soil-test');
-          expect(plant.directSunlight).toBe(true);
+          expect(plant.direct_sunlight).toBe(true);
           expect(plant.inside).toBe(false);
-          expect(plant.wateringFreq).toBe(2);
+          expect(plant.watering_freq).toBe(2);
           expect(plant.created_at).not.toBe('Invalid Date');
         });
     });
@@ -194,11 +194,11 @@ describe('/api/users/:user_id/plants', () => {
           plant_name: 'plant-name-test',
           plant_type: 'indoor',
           soil: 'soil-test',
-          directSunlight: true,
+          direct_sunlight: true,
           inside: false,
-          wateringFreq: 2,
+          watering_freq: 2,
           plant_variety: 'tomato',
-          potHeight: 10.5,
+          pot_height: 10.5,
         })
         .then(({ body: { msg } }) => {
           expect(msg).toBe('user not found');
@@ -212,11 +212,11 @@ describe('/api/users/:user_id/plants', () => {
         .send({
           plant_name: 'plant-name-test',
           plant_type: 'indoor',
-          directSunlight: true,
+          direct_sunlight: true,
           inside: false,
-          wateringFreq: 2,
+          watering_freq: 2,
           plant_variety: 'tomato',
-          potHeight: 10.5,
+          pot_height: 10.5,
         })
         .then(({ body: { msg } }) => {
           expect(msg).toBe('bad request');
@@ -231,11 +231,11 @@ describe('/api/users/:user_id/plants', () => {
           plant_name: 'plant-name-test',
           plant_type: 'indoor',
           soil: 'soil-test',
-          directSunlight: true,
+          direct_sunlight: true,
           inside: false,
-          wateringFreq: 2,
+          watering_freq: 2,
           plant_variety: 'tomato',
-          potHeight: 10.5,
+          pot_height: 10.5,
         })
         .then(({ body: { msg } }) => {
           expect(msg).toBe('bad request');
@@ -267,11 +267,11 @@ describe('/api/plants/:plant_id', () => {
           plant_name: 'plant-name-test-change',
           plant_type: 'vegetable',
           soil: 'soil-test-change',
-          directSunlight: false,
+          direct_sunlight: false,
           inside: true,
-          wateringFreq: 4,
+          watering_freq: 4,
           plant_variety: 'tomato',
-          potHeight: 10.5,
+          pot_height: 10.5,
         })
         .expect(200)
         .then(({ body: { plant } }) => {
@@ -281,11 +281,11 @@ describe('/api/plants/:plant_id', () => {
             ['plant_name', 'plant-name-test-change'],
             ['plant_type', 'vegetable'],
             ['soil', 'soil-test-change'],
-            ['directSunlight', false],
+            ['direct_sunlight', false],
             ['plant_variety', 'tomato'],
-            ['potHeight', '10.50'],
+            ['pot_height', '10.50'],
             ['inside', true],
-            ['wateringFreq', 4],
+            ['watering_freq', 4],
             ['created_at', new Date(1416140514171).toISOString()],
           ]);
         });
@@ -295,7 +295,7 @@ describe('/api/plants/:plant_id', () => {
       return request(app)
         .patch('/api/plants/1')
         .send({
-          potHeight: 15.5,
+          pot_height: 15.5,
         })
         .expect(200)
         .then(({ body: { plant } }) => {
@@ -305,11 +305,11 @@ describe('/api/plants/:plant_id', () => {
             ['plant_name', 'plantName1'],
             ['plant_type', 'indoor'],
             ['soil', 'soil1'],
-            ['directSunlight', true],
+            ['direct_sunlight', true],
             ['inside', false],
-            ['wateringFreq', 2],
+            ['watering_freq', 2],
             ['plant_variety', 'potatoe'],
-            ['potHeight', '15.50'],
+            ['pot_height', '15.50'],
             ['created_at', new Date(1416140514171).toISOString()],
           ]);
         });
@@ -319,7 +319,7 @@ describe('/api/plants/:plant_id', () => {
       return request(app)
         .patch('/api/plants/1')
         .send({
-          potHeight: 'abc',
+          pot_height: 'abc',
         })
         .expect(400)
         .then(({ body: { msg } }) => {
@@ -335,9 +335,9 @@ describe('/api/plants/:plant_id', () => {
           plant_name: 'plant-name-test-change',
           plant_type: 'vegetable',
           soil: 'soil-test-change',
-          directSunlight: false,
+          direct_sunlight: false,
           inside: true,
-          wateringFreq: 4,
+          watering_freq: 4,
         })
         .then(({ body: { msg } }) => {
           expect(msg).toBe('plant not found');
@@ -351,9 +351,9 @@ describe('/api/plants/:plant_id', () => {
           plant_name: 'plant-name-test-change',
           plant_type: 'vegetable',
           soil: 'soil-test-change',
-          directSunlight: false,
+          direct_sunlight: false,
           inside: true,
-          wateringFreq: 4,
+          watering_freq: 4,
         })
         .expect(400)
         .then(({ body: { msg } }) => {
