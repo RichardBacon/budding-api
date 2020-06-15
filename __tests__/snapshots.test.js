@@ -16,7 +16,7 @@ describe('/api/plants/:plant_id/snapshots', () => {
         .then(({ body: { snaps } }) => {
           expect(Array.isArray(snaps)).toBe(true);
           expect(snaps.length).toBe(2);
-          snaps.map((snap) => {
+          snaps.forEach((snap) => {
             expect(snap.plant_id).toBe(1);
           });
         });
@@ -28,7 +28,7 @@ describe('/api/plants/:plant_id/snapshots', () => {
         .then(({ body: { snaps } }) => {
           expect(Array.isArray(snaps)).toBe(true);
           expect(snaps.length).toBe(2);
-          snaps.map((snap) => {
+          snaps.forEach((snap) => {
             expect(snap.plant_id).toBe(4);
           });
         });
