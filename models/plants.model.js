@@ -55,20 +55,22 @@ const insertPlantByUserId = (
     plant_name,
     plant_type,
     soil,
-    directSunlight,
+    direct_sunlight,
     inside,
-    wateringFreq,
+    watering_freq,
     plant_variety,
-    potHeight,
+    pot_height,
   },
 ) => {
   if (
     !plant_name ||
     !plant_type ||
     !soil ||
-    !wateringFreq ||
+    typeof direct_sunlight === 'undefined' ||
+    typeof inside === 'undefined' ||
+    !watering_freq ||
     !plant_variety ||
-    !potHeight
+    !pot_height
   ) {
     return Promise.reject({
       status: 400,
@@ -96,11 +98,11 @@ const insertPlantByUserId = (
           user_id,
           plant_type,
           soil,
-          directSunlight,
+          direct_sunlight,
           inside,
-          wateringFreq,
+          watering_freq,
           plant_variety,
-          potHeight,
+          pot_height,
         })
         .into('plants')
         .returning('*');
@@ -122,24 +124,40 @@ const updatePlantById = (
     plant_name,
     plant_type,
     soil,
-    directSunlight,
+    direct_sunlight,
     inside,
-    wateringFreq,
+    watering_freq,
     plant_variety,
-    potHeight,
+    pot_height,
   },
 ) => {
+  if (
+    !plant_name &&
+    !plant_type &&
+    !plant_variety &&
+    !pot_height &&
+    !soil &&
+    typeof direct_sunlight === 'undefined' &&
+    typeof inside === 'undefined' &&
+    !watering_freq
+  ) {
+    return Promise.reject({
+      status: 400,
+      msg: 'bad request',
+    });
+  }
+
   return connection('plants')
     .modify((query) => {
       if (plant_name) query.update('plant_name', plant_name);
       if (plant_type) query.update('plant_type', plant_type);
       if (soil) query.update('soil', soil);
-      if (directSunlight !== null)
-        query.update('directSunlight', directSunlight);
-      if (inside !== null) query.update('inside', inside);
-      if (wateringFreq) query.update('wateringFreq', wateringFreq);
+      if (typeof direct_sunlight !== 'undefined')
+        query.update('direct_sunlight', direct_sunlight);
+      if (typeof inside !== 'undefined') query.update('inside', inside);
+      if (watering_freq) query.update('watering_freq', watering_freq);
       if (plant_variety) query.update('plant_variety', plant_variety);
-      if (potHeight) query.update('potHeight', potHeight);
+      if (pot_height) query.update('pot_height', pot_height);
     })
     .where({ plant_id })
     .returning('*')

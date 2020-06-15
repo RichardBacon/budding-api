@@ -32,21 +32,20 @@ const insertSnapByPlantId = (params, body) => {
           .where({ plant_id })
           .returning('*');
       });
-  } else {
-    return Promise.reject({ status: 400, msg: 'bad request' });
   }
+  return Promise.reject({ status: 400, msg: 'bad request' });
 };
 
 const removeSnapBySnapId = ({ snapshot_id }) => {
   return connection('snapshots')
+    .del()
     .where({ snapshot_id })
-    .then((snap) => {
-      if (snap.length === 0) {
+    .then((deletionCount) => {
+      if (deletionCount === 0) {
         return Promise.reject({ status: 404, msg: 'snapshot not found' });
       }
-    })
-    .then(() => {
-      return connection('snapshots').where({ snapshot_id }).del();
+
+      return Promise.resolve();
     });
 };
 
