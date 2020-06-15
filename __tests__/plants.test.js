@@ -47,8 +47,8 @@ describe('/api/users/:user_id/plants', () => {
               'plant_variety',
               'pot_height',
               'soil',
-              'direct_sunlight',
-              'inside',
+              'sunlight',
+              'location',
               'watering_freq',
               'created_at',
               'snapshot_count',
@@ -111,11 +111,11 @@ describe('/api/users/:user_id/plants', () => {
 
     test('status:200 - plants can be filtered by plant_type', () => {
       return request(app)
-        .get('/api/users/1/plants?plant_type=indoor')
+        .get('/api/users/1/plants?plant_type=vegetable')
         .expect(200)
         .then(({ body: { plants } }) => {
           plants.forEach((plant) => {
-            expect(plant.plant_type).toBe('indoor');
+            expect(plant.plant_type).toBe('vegetable');
           });
         });
     });
@@ -165,9 +165,9 @@ describe('/api/users/:user_id/plants', () => {
           plant_name: 'plant-name-test',
           plant_type: 'indoor',
           soil: 'soil-test',
-          direct_sunlight: true,
-          inside: false,
-          watering_freq: 2,
+          sunlight: 'indirect',
+          location: 'inside',
+          watering_freq: 'twice a day',
           plant_variety: 'tomato',
           pot_height: 10.5,
         })
@@ -179,9 +179,9 @@ describe('/api/users/:user_id/plants', () => {
           expect(plant.plant_variety).toBe('tomato');
           expect(plant.pot_height).toBe('10.50');
           expect(plant.soil).toBe('soil-test');
-          expect(plant.direct_sunlight).toBe(true);
-          expect(plant.inside).toBe(false);
-          expect(plant.watering_freq).toBe(2);
+          expect(plant.sunlight).toBe('indirect');
+          expect(plant.location).toBe('inside');
+          expect(plant.watering_freq).toBe('twice a day');
           expect(plant.created_at).not.toBe('Invalid Date');
         });
     });
@@ -194,9 +194,9 @@ describe('/api/users/:user_id/plants', () => {
           plant_name: 'plant-name-test',
           plant_type: 'indoor',
           soil: 'soil-test',
-          direct_sunlight: true,
-          inside: false,
-          watering_freq: 2,
+          sunlight: 'indirect',
+          location: 'inside',
+          watering_freq: 'twice a day',
           plant_variety: 'tomato',
           pot_height: 10.5,
         })
@@ -212,9 +212,9 @@ describe('/api/users/:user_id/plants', () => {
         .send({
           plant_name: 'plant-name-test',
           plant_type: 'indoor',
-          direct_sunlight: true,
-          inside: false,
-          watering_freq: 2,
+          sunlight: 'indirect',
+          location: 'inside',
+          watering_freq: 'twice a day',
           plant_variety: 'tomato',
           pot_height: 10.5,
         })
@@ -231,9 +231,9 @@ describe('/api/users/:user_id/plants', () => {
           plant_name: 'plant-name-test',
           plant_type: 'indoor',
           soil: 'soil-test',
-          direct_sunlight: true,
-          inside: false,
-          watering_freq: 2,
+          sunlight: 'indirect',
+          location: 'inside',
+          watering_freq: 'twice a day',
           plant_variety: 'tomato',
           pot_height: 10.5,
         })
@@ -267,9 +267,9 @@ describe('/api/plants/:plant_id', () => {
           plant_name: 'plant-name-test-change',
           plant_type: 'vegetable',
           soil: 'soil-test-change',
-          direct_sunlight: false,
-          inside: true,
-          watering_freq: 4,
+          sunlight: 'direct',
+          location: 'outside',
+          watering_freq: 'twice a day',
           plant_variety: 'tomato',
           pot_height: 10.5,
         })
@@ -281,11 +281,11 @@ describe('/api/plants/:plant_id', () => {
             ['plant_name', 'plant-name-test-change'],
             ['plant_type', 'vegetable'],
             ['soil', 'soil-test-change'],
-            ['direct_sunlight', false],
+            ['sunlight', 'direct'],
             ['plant_variety', 'tomato'],
             ['pot_height', '10.50'],
-            ['inside', true],
-            ['watering_freq', 4],
+            ['location', 'outside'],
+            ['watering_freq', 'twice a day'],
             ['created_at', new Date(1416140514171).toISOString()],
           ]);
         });
@@ -303,12 +303,12 @@ describe('/api/plants/:plant_id', () => {
             ['plant_id', 1],
             ['user_id', 1],
             ['plant_name', 'plantName1'],
-            ['plant_type', 'indoor'],
+            ['plant_type', 'vegetable'],
             ['soil', 'soil1'],
-            ['direct_sunlight', true],
-            ['inside', false],
-            ['watering_freq', 2],
-            ['plant_variety', 'potatoe'],
+            ['sunlight', 'indirect'],
+            ['location', 'inside'],
+            ['watering_freq', 'twice a day'],
+            ['plant_variety', 'tomato'],
             ['pot_height', '15.50'],
             ['created_at', new Date(1416140514171).toISOString()],
           ]);
@@ -335,8 +335,8 @@ describe('/api/plants/:plant_id', () => {
           plant_name: 'plant-name-test-change',
           plant_type: 'vegetable',
           soil: 'soil-test-change',
-          direct_sunlight: false,
-          inside: true,
+          sunlight: false,
+          location: true,
           watering_freq: 4,
         })
         .then(({ body: { msg } }) => {
@@ -351,8 +351,8 @@ describe('/api/plants/:plant_id', () => {
           plant_name: 'plant-name-test-change',
           plant_type: 'vegetable',
           soil: 'soil-test-change',
-          direct_sunlight: false,
-          inside: true,
+          sunlight: false,
+          location: true,
           watering_freq: 4,
         })
         .expect(400)
