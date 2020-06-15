@@ -55,8 +55,8 @@ const insertPlantByUserId = (
     plant_name,
     plant_type,
     soil,
-    direct_sunlight,
-    inside,
+    sunlight,
+    location,
     watering_freq,
     plant_variety,
     pot_height,
@@ -66,8 +66,8 @@ const insertPlantByUserId = (
     !plant_name ||
     !plant_type ||
     !soil ||
-    typeof direct_sunlight === 'undefined' ||
-    typeof inside === 'undefined' ||
+    !sunlight ||
+    !location ||
     !watering_freq ||
     !plant_variety ||
     !pot_height
@@ -98,8 +98,8 @@ const insertPlantByUserId = (
           user_id,
           plant_type,
           soil,
-          direct_sunlight,
-          inside,
+          sunlight,
+          location,
           watering_freq,
           plant_variety,
           pot_height,
@@ -124,8 +124,8 @@ const updatePlantById = (
     plant_name,
     plant_type,
     soil,
-    direct_sunlight,
-    inside,
+    sunlight,
+    location,
     watering_freq,
     plant_variety,
     pot_height,
@@ -137,8 +137,8 @@ const updatePlantById = (
     !plant_variety &&
     !pot_height &&
     !soil &&
-    typeof direct_sunlight === 'undefined' &&
-    typeof inside === 'undefined' &&
+    !sunlight &&
+    !location &&
     !watering_freq
   ) {
     return Promise.reject({
@@ -152,9 +152,8 @@ const updatePlantById = (
       if (plant_name) query.update('plant_name', plant_name);
       if (plant_type) query.update('plant_type', plant_type);
       if (soil) query.update('soil', soil);
-      if (typeof direct_sunlight !== 'undefined')
-        query.update('direct_sunlight', direct_sunlight);
-      if (typeof inside !== 'undefined') query.update('inside', inside);
+      if (typeof sunlight !== 'undefined') query.update('sunlight', sunlight);
+      if (typeof location !== 'undefined') query.update('location', location);
       if (watering_freq) query.update('watering_freq', watering_freq);
       if (plant_variety) query.update('plant_variety', plant_variety);
       if (pot_height) query.update('pot_height', pot_height);
