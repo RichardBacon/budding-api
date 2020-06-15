@@ -68,9 +68,9 @@
           "plant_variety": "plant-variety-1",
           "pot_height": "10.00",
           "soil": "soil-1",
-          "direct_sunlight": true,
-          "inside": false,
-          "watering_freq": 2,
+          "sunlight": "indirect",
+          "location": "outside",
+          "watering_freq": "twice a day",
           "created_at": "2020-11-16T12:21:54.171Z"
         },
         {
@@ -81,9 +81,9 @@
           "plant_variety": "plant-variety-2",
           "pot_height": "20.00",
           "soil": "soil-2",
-          "direct_sunlight": false,
-          "inside": true,
-          "watering_freq": 4,
+          "sunlight": "indirect",
+          "location": "inside",
+          "watering_freq": "twice a day",
           "created_at": "2020-11-16T12:21:54.171Z"
         }
       ]
@@ -98,9 +98,9 @@
       "plant_variety": "new-plant-variety",
       "pot_height": 12.5,
       "soil": "new-soil",
-      "direct_sunlight": false,
-      "inside": true,
-      "watering_freq": 4
+      "sunlight": "indirect",
+      "location": "inside",
+      "watering_freq": "twice a day"
     },
     "example response": {
       "plant": {
@@ -111,9 +111,9 @@
         "plant_variety": "new-plant-variety",
         "pot_height": "12.50",
         "soil": "new-soil",
-        "direct_sunlight": false,
-        "inside": true,
-        "watering_freq": 4,
+        "sunlight": "indirect",
+        "location": "inside",
+        "watering_freq": "twice a day",
         "created_at": "2020-11-16T12:21:54.171Z"
       }
     }
@@ -130,9 +130,9 @@
         "plant_variety": "plant-variety-1",
         "pot_height": "10.00",
         "soil": "soil-1",
-        "direct_sunlight": true,
-        "inside": false,
-        "watering_freq": 2,
+        "sunlight": "indirect",
+        "location": "outside",
+        "watering_freq": "twice a day",
         "created_at": "2020-11-16T12:21:54.171Z"
       }
     }
@@ -146,9 +146,9 @@
       "plant_variety": "new-plant-variety",
       "pot_height": 12.5,
       "soil": "new-soil",
-      "direct_sunlight": false,
-      "inside": true,
-      "watering_freq": 4
+      "sunlight": "indirect",
+      "location": "inside",
+      "watering_freq": "twice a day"
     },
     "example response": {
       "plant": {
@@ -159,9 +159,9 @@
         "plant_variety": "new-plant-variety",
         "pot_height": "12.50",
         "soil": "new-soil",
-        "direct_sunlight": false,
-        "inside": true,
-        "watering_freq": 4,
+        "sunlight": "indirect",
+        "location": "inside",
+        "watering_freq": "twice a day",
         "created_at": "2020-11-16T12:21:54.171Z"
       }
     }
