@@ -1,10 +1,12 @@
 const connection = require('../db/connection');
+const { orderBy } = require('../db/connection');
 
 const selectSnaps = ({ plant_id }) => {
   return connection
     .select('*')
     .from('snapshots')
     .where({ plant_id })
+    .orderBy('created_at', 'desc')
     .then((snaps) => {
       if (snaps.length === 0) {
         return Promise.reject({

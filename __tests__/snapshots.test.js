@@ -23,16 +23,29 @@ describe('/api/plants/:plant_id/snapshots', () => {
     });
     test('status:200 - responds with array of snapshot objects', () => {
       return request(app)
-        .get('/api/plants/4/snapshots')
+        .get('/api/plants/1/snapshots')
         .expect(200)
         .then(({ body: { snaps } }) => {
           expect(Array.isArray(snaps)).toBe(true);
           expect(snaps.length).toBe(2);
           snaps.forEach((snap) => {
-            expect(snap.plant_id).toBe(4);
+            expect(snap.plant_id).toBe(1);
           });
         });
     });
+
+    test('status:200 - snaps are sorted by date (default), descending', () => {
+      return request(app)
+        .get('/api/plants/4/snapshots')
+        .expect(200)
+        .then(({ body: { snaps } }) => {
+          console.log(snaps);
+          expect(snaps).toBeSortedBy('created_at', {
+            descending: true,
+          });
+        });
+    });
+
     test('status:405 - invalid method - responds with msg: "method not allowed"', () => {
       const invalidMethods = ['patch', 'put', 'delete'];
       const requests = invalidMethods.map((method) => {
@@ -43,7 +56,6 @@ describe('/api/plants/:plant_id/snapshots', () => {
             expect(msg).toBe('method not allowed');
           });
       });
-
       return Promise.all(requests);
     });
 
