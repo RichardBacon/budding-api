@@ -105,7 +105,7 @@ describe('/api/users/:user_id/plants', () => {
           plants.forEach((plant) => {
             expect(plant.snapshot_count).toEqual(expect.any(String));
           });
-          expect(plants[0].snapshot_count).toBe('2');
+          expect(plants[0].snapshot_count).toBe('6');
         });
     });
 
