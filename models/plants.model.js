@@ -62,16 +62,7 @@ const insertPlantByUserId = (
     pot_height,
   },
 ) => {
-  if (
-    !plant_name ||
-    !plant_type ||
-    !soil ||
-    !sunlight ||
-    !location ||
-    !watering_freq ||
-    !plant_variety ||
-    !pot_height
-  ) {
+  if (!plant_name || !plant_type || !plant_variety || !pot_height) {
     return Promise.reject({
       status: 400,
       msg: 'bad request',

@@ -163,7 +163,7 @@ describe('/api/users/:user_id/plants', () => {
         .post('/api/users/1/plants')
         .send({
           plant_name: 'plant-name-test',
-          plant_type: 'indoor',
+          plant_type: 'vegetable',
           soil: 'soil-test',
           sunlight: 'indirect',
           location: 'inside',
@@ -175,7 +175,7 @@ describe('/api/users/:user_id/plants', () => {
         .then(({ body: { plant } }) => {
           expect(plant.plant_id).toBe(7);
           expect(plant.plant_name).toBe('plant-name-test');
-          expect(plant.plant_type).toBe('indoor');
+          expect(plant.plant_type).toBe('vegetable');
           expect(plant.plant_variety).toBe('tomato');
           expect(plant.pot_height).toBe('10.50');
           expect(plant.soil).toBe('soil-test');
@@ -211,11 +211,7 @@ describe('/api/users/:user_id/plants', () => {
         .expect(400)
         .send({
           plant_name: 'plant-name-test',
-          plant_type: 'indoor',
-          sunlight: 'indirect',
-          location: 'inside',
-          watering_freq: 'twice a day',
-          plant_variety: 'tomato',
+          plant_type: 'vegetable',
           pot_height: 10.5,
         })
         .then(({ body: { msg } }) => {
