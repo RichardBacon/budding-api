@@ -20,7 +20,7 @@ const selectSnaps = ({ plant_id }) => {
 
 const insertSnapByPlantId = (params, body) => {
   const { plant_id } = params;
-  const { plant_uri, no_leaves, height } = body;
+  const { plant_uri, height } = body;
   if ((plant_uri, height, plant_id)) {
     return connection('plants')
       .select('*')
@@ -30,7 +30,7 @@ const insertSnapByPlantId = (params, body) => {
           return Promise.reject({ status: 404, msg: 'plant not found' });
         }
         return connection('snapshots')
-          .insert([{ plant_id, plant_uri, no_leaves, height }])
+          .insert([{ plant_id, plant_uri, height }])
           .where({ plant_id })
           .returning('*');
       });

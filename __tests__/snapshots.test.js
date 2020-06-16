@@ -84,7 +84,7 @@ describe('/api/plants/:plant_id/snapshots', () => {
         .post('/api/plants/2/snapshots')
         .send({
           plant_uri: 'plantURIlink.jpg',
-          no_leaves: 2,
+
           height: 8,
           created_at: 1416140518171,
         })
@@ -100,7 +100,7 @@ describe('/api/plants/:plant_id/snapshots', () => {
         .post('/api/plants/2/snapshots')
         .send({
           plant_uri: 'plantURIlink.jpg',
-          no_leaves: 2,
+
           created_at: 1416140518171,
         })
         .expect(400)
@@ -114,7 +114,7 @@ describe('/api/plants/:plant_id/snapshots', () => {
         .send({
           height: 5,
           plant_uri: 'plantURIlink.jpg',
-          no_leaves: 2,
+
           created_at: 1416140518171,
         })
         .expect(404)
@@ -128,7 +128,7 @@ describe('/api/plants/:plant_id/snapshots', () => {
         .send({
           height: 5,
           plant_uri: 'plantURIlink.jpg',
-          no_leaves: 2,
+
           created_at: 1416140518171,
         })
         .expect(400)
