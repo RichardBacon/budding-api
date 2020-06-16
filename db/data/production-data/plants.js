@@ -86,7 +86,7 @@ module.exports = [
   },
   {
     plant_name: 'plantName8',
-    user_id: 4,
+    user_id: 1,
     plant_variety: 'tomato',
     pot_height: 10,
     plant_type: 'vegetable',
@@ -98,7 +98,7 @@ module.exports = [
   },
   {
     plant_name: 'plantName9',
-    user_id: 5,
+    user_id: 2,
     plant_variety: 'tomato',
     pot_height: 10.5,
     plant_type: 'vegetable',
@@ -110,7 +110,7 @@ module.exports = [
   },
   {
     plant_name: 'plantName10',
-    user_id: 6,
+    user_id: 3,
     plant_variety: 'tomato',
     pot_height: 10,
     plant_type: 'vegetable',
