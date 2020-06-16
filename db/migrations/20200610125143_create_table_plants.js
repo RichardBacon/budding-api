@@ -10,8 +10,8 @@ exports.up = function (knex) {
     plantsTable.string('plant_variety').notNullable();
     plantsTable.decimal('pot_height').notNullable();
     plantsTable.string('soil');
-    plantsTable.string('sunlight').notNullable();
-    plantsTable.string('location').notNullable();
+    plantsTable.string('sunlight');
+    plantsTable.string('location');
     plantsTable.string('watering_freq');
     plantsTable.timestamp('created_at').defaultTo(knex.fn.now());
   });
