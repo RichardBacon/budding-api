@@ -14,6 +14,7 @@ describe('/api/plants/:plant_id/snapshots', () => {
         .get('/api/plants/1/snapshots')
         .expect(200)
         .then(({ body: { snaps } }) => {
+          console.log(snaps);
           expect(Array.isArray(snaps)).toBe(true);
           expect(snaps.length).toBe(2);
           snaps.forEach((snap) => {
