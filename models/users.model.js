@@ -4,12 +4,12 @@ const selectUsers = () => {
   return connection.select('*').from('users');
 };
 
-const selectUserByID = ({ user_id }) => {
+const selectUserByUsername = ({ username }) => {
   return connection
     .select('*')
     .from('users')
     .modify((query) => {
-      if (user_id) query.where('user_id', user_id);
+      if (username) query.where('username', username);
     })
     .then((users) => {
       if (users.length === 0) {
@@ -44,6 +44,6 @@ const insertUser = ({ username, name }) => {
 
 module.exports = {
   selectUsers,
-  selectUserByID,
+  selectUserByUsername,
   insertUser,
 };

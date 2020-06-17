@@ -101,12 +101,61 @@ describe('/users', () => {
     });
   });
 
-  describe('/:user_id', () => {
+  // describe('/:user_id', () => {
+  //   test('status:405 - invalid method - responds with msg: "method not allowed"', () => {
+  //     const invalidMethods = ['post', 'patch', 'put', 'delete'];
+  //     const requests = invalidMethods.map((method) => {
+  //       return request(app)
+  //         [method]('/api/users/1')
+  //         .expect(405)
+  //         .then(({ body: { msg } }) => {
+  //           expect(msg).toBe('method not allowed');
+  //         });
+  //     });
+
+  //     return Promise.all(requests);
+  //   });
+
+  //   describe('GET', () => {
+  //     test('status:200 - responds with requested user object', () => {
+  //       return request(app)
+  //         .get('/api/users/1')
+  //         .expect(200)
+  //         .then(({ body: { user } }) => {
+  //           expect(user).toEqual({
+  //             user_id: 1,
+  //             username: 'robert_plant',
+  //             name: 'Robert',
+  //           });
+  //         });
+  //     });
+
+  //     test('status:404 - non-existent user_id - responds with msg: "user not found"', () => {
+  //       return request(app)
+  //         .get('/api/users/100')
+  //         .expect(404)
+  //         .then(({ body: { msg } }) => {
+  //           expect(msg).toBe('user not found');
+  //         });
+  //     });
+
+  //     test('status:400 - invalid user_id - responds with msg: "bad request"', () => {
+  //       return request(app)
+  //         .get('/api/users/notanumber')
+  //         .expect(400)
+  //         .then(({ body: { msg } }) => {
+  //           expect(msg).toBe('bad request');
+  //         });
+  //     });
+  //   });
+  // });
+
+  describe('/:username', () => {
     test('status:405 - invalid method - responds with msg: "method not allowed"', () => {
       const invalidMethods = ['post', 'patch', 'put', 'delete'];
       const requests = invalidMethods.map((method) => {
         return request(app)
-          [method]('/api/users/1')
+          [method]('/api/users/robert_plant')
           .expect(405)
           .then(({ body: { msg } }) => {
             expect(msg).toBe('method not allowed');
@@ -119,7 +168,7 @@ describe('/users', () => {
     describe('GET', () => {
       test('status:200 - responds with requested user object', () => {
         return request(app)
-          .get('/api/users/1')
+          .get('/api/users/robert_plant')
           .expect(200)
           .then(({ body: { user } }) => {
             expect(user).toEqual({
@@ -130,21 +179,12 @@ describe('/users', () => {
           });
       });
 
-      test('status:404 - non-existent user_id - responds with msg: "user not found"', () => {
+      test('status:404 - non-existent username - responds with msg: "user not found"', () => {
         return request(app)
-          .get('/api/users/100')
+          .get('/api/users/nonExistentUser')
           .expect(404)
           .then(({ body: { msg } }) => {
             expect(msg).toBe('user not found');
-          });
-      });
-
-      test('status:400 - invalid user_id - responds with msg: "bad request"', () => {
-        return request(app)
-          .get('/api/users/notanumber')
-          .expect(400)
-          .then(({ body: { msg } }) => {
-            expect(msg).toBe('bad request');
           });
       });
     });
