@@ -39,13 +39,7 @@ describe('/users', () => {
         .expect(200)
         .then(({ body: { users } }) => {
           users.forEach((user) => {
-            expect(user).toContainAllKeys([
-              'user_id',
-              'username',
-              'name',
-              'avatar_url',
-              'password',
-            ]);
+            expect(user).toContainAllKeys(['user_id', 'username', 'name']);
           });
         });
     });
@@ -58,9 +52,6 @@ describe('/users', () => {
         .send({
           username: 'unique-username',
           name: 'full name',
-          avatar_url: 'avatar-url',
-
-          password: 'itsapassword',
         })
         .expect(201)
         .then(({ body: { user } }) => {
@@ -68,9 +59,6 @@ describe('/users', () => {
             user_id: 4,
             username: 'unique-username',
             name: 'full name',
-            avatar_url: 'avatar-url',
-
-            password: 'itsapassword',
           });
         });
     });
@@ -80,9 +68,6 @@ describe('/users', () => {
         .post('/api/users')
         .send({
           name: 'full name',
-          avatar_url: 'avatar-url',
-
-          password: 'itsapassword',
         })
         .expect(400)
         .then(({ body: { msg } }) => {
@@ -95,38 +80,6 @@ describe('/users', () => {
         .post('/api/users')
         .send({
           username: 'unique-username',
-          avatar_url: 'avatar-url',
-
-          password: 'itsapassword',
-        })
-        .expect(400)
-        .then(({ body: { msg } }) => {
-          expect(msg).toBe('bad request');
-        });
-    });
-
-    test('status:400 - invalid body, missing avatar_url key - responds with msg: "bad request"', () => {
-      return request(app)
-        .post('/api/users')
-        .send({
-          username: 'unique-username',
-          name: 'full name',
-
-          password: 'itsapassword',
-        })
-        .expect(400)
-        .then(({ body: { msg } }) => {
-          expect(msg).toBe('bad request');
-        });
-    });
-
-    test('status:400 - invalid body, missing password key - responds with msg: "bad request"', () => {
-      return request(app)
-        .post('/api/users')
-        .send({
-          username: 'unique-username',
-          name: 'full name',
-          avatar_url: 'avatar-url',
         })
         .expect(400)
         .then(({ body: { msg } }) => {
@@ -138,11 +91,8 @@ describe('/users', () => {
       return request(app)
         .post('/api/users')
         .send({
-          username: 'rogersop',
-          name: 'full name',
-          avatar_url: 'avatar-url',
-
-          password: 'itsapassword',
+          username: 'robert_plant',
+          name: 'Robert',
         })
         .expect(400)
         .then(({ body: { msg } }) => {
@@ -174,11 +124,8 @@ describe('/users', () => {
           .then(({ body: { user } }) => {
             expect(user).toEqual({
               user_id: 1,
-              username: 'butter_bridge',
-              name: 'jonny',
-              avatar_url:
-                'https://www.healthytherapies.com/wp-content/uploads/2016/06/Lime3.jpg',
-              password: 'abc123',
+              username: 'robert_plant',
+              name: 'Robert',
             });
           });
       });

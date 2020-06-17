@@ -3,8 +3,6 @@ exports.up = function (knex) {
     usersTable.increments('user_id');
     usersTable.string('username').unique().notNullable();
     usersTable.string('name').notNullable();
-    usersTable.string('avatar_url').notNullable();
-    usersTable.string('password').notNullable();
   });
 };
 
