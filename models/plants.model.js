@@ -11,6 +11,15 @@ const selectPlantsByUserId = (
     });
   }
 
+  // get plants
+  // if no plants-
+  //   check user exists
+  //   if user exists
+  //     user has 0 plants
+  //   if user doesn't exist
+  //     bad request
+  //  if plants - return them
+
   return connection
     .select('plants.*')
     .count('snapshots.snapshot_id AS snapshot_count')
@@ -24,11 +33,22 @@ const selectPlantsByUserId = (
     .orderBy(sort_by, order)
     .then((plants) => {
       if (plants.length === 0) {
-        return Promise.reject({
-          status: 404,
-          msg: 'plant not found',
-        });
+        return connection
+          .select('*')
+          .from('users')
+          .where('user_id', user_id)
+          .then((users) => {
+            if (users.length === 0) {
+              return Promise.reject({
+                status: 404,
+                msg: 'no plants found',
+              });
+            }
+
+            return []; // empty plants array
+          });
       }
+
       return plants;
     });
 };
@@ -79,9 +99,7 @@ const insertPlantByUserId = (
   return connection
     .select('users.user_id')
     .from('users')
-    .modify((query) => {
-      if (user_id) query.where('user_id', user_id);
-    })
+    .where('user_id', user_id)
     .then((users) => {
       if (users.length === 0) {
         return Promise.reject({

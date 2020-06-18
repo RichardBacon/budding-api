@@ -8,9 +8,7 @@ const selectUserByUsername = ({ username }) => {
   return connection
     .select('*')
     .from('users')
-    .modify((query) => {
-      if (username) query.where('username', username);
-    })
+    .where('username', username)
     .then((users) => {
       if (users.length === 0) {
         return Promise.reject({

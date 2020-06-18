@@ -29,7 +29,7 @@ describe('/users', () => {
         .expect(200)
         .then(({ body: { users } }) => {
           expect(Array.isArray(users)).toBe(true);
-          expect(users.length).toBe(3);
+          expect(users.length).toBe(4);
         });
     });
 
@@ -56,7 +56,7 @@ describe('/users', () => {
         .expect(201)
         .then(({ body: { user } }) => {
           expect(user).toEqual({
-            user_id: 4,
+            user_id: 5,
             username: 'unique-username',
             name: 'full name',
           });

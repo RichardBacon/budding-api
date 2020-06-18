@@ -120,6 +120,15 @@ describe('/api/users/:user_id/plants', () => {
         });
     });
 
+    test('status:200 - returns an empty array if valid user has no plants', () => {
+      return request(app)
+        .get('/api/users/4/plants')
+        .expect(200)
+        .then(({ body: { plants } }) => {
+          expect(plants).toEqual([]);
+        });
+    });
+
     test('status:400 - invalid sort_by query - responds with msg: "bad request"', () => {
       return request(app)
         .get('/api/users/1/plants?sort_by=invalidQuery')
@@ -138,16 +147,16 @@ describe('/api/users/:user_id/plants', () => {
         });
     });
 
-    test('status:404 - non-existent plant_id - responds with msg: "plant not found"', () => {
+    test('status:404 - non-existent user_id - responds with msg: "no plants found"', () => {
       return request(app)
         .get('/api/users/7/plants')
         .expect(404)
         .then(({ body: { msg } }) => {
-          expect(msg).toBe('plant not found');
+          expect(msg).toBe('no plants found');
         });
     });
 
-    test('status:404 - invalid plant_id - responds with msg: "bad request"', () => {
+    test('status:404 - invalid user_id - responds with msg: "bad request"', () => {
       return request(app)
         .get('/api/users/notANumber/plants')
         .expect(400)

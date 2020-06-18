@@ -11,4 +11,8 @@ module.exports = [
     username: 'herb',
     name: 'Herbert',
   },
+  {
+    username: 'Mazza',
+    name: 'Mayilyn Monrose',
+  },
 ];
