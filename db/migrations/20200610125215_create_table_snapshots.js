@@ -7,7 +7,7 @@ exports.up = function (knex) {
       .notNullable()
       .onDelete('CASCADE');
     snapshotsTable.string('plant_uri').notNullable();
-    snapshotsTable.integer('height').notNullable();
+    snapshotsTable.decimal('height').notNullable();
     snapshotsTable.timestamp('created_at').defaultTo(knex.fn.now());
   });
 };
