@@ -34,8 +34,9 @@ const insertSnapByPlantId = (params, body) => {
           .where({ plant_id })
           .returning('*');
       });
+  } else {
+    return Promise.reject({ status: 400, msg: 'bad request' });
   }
-  return Promise.reject({ status: 400, msg: 'bad request' });
 };
 
 const removeSnapBySnapId = ({ snapshot_id }) => {
