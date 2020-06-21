@@ -47,7 +47,7 @@
   },
   "GET /api/users/:user_id/plants": {
     "description": "serves an array of plants",
-    "queries": [],
+    "queries": ["sort_by", "order"],
     "example response": {
       "plants": [
         {
