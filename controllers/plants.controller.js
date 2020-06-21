@@ -49,8 +49,8 @@ const patchPlantById = (req, res, next) => {
 
 const postSnapByPlantId = (req, res, next) => {
   insertSnapByPlantId(req.params, req.body)
-    .then(([snap]) => {
-      res.status(200).send({ snap });
+    .then((snap) => {
+      res.status(201).send({ snap });
     })
     .catch(next);
 };

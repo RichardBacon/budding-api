@@ -77,20 +77,23 @@ describe('/api/plants/:plant_id/snapshots', () => {
     });
   });
   describe('POST', () => {
-    test('status:200 - responds with posted snapshot', () => {
+    test('status:201 - responds with posted snapshot', () => {
       return request(app)
         .post('/api/plants/2/snapshots')
         .send({
           plant_uri: 'plantURIlink.jpg',
           height: 8.5,
         })
-        .expect(200)
+        .expect(201)
         .then(({ body: { snap } }) => {
           expect(typeof snap).toBe('object');
           expect(snap.plant_id).toBe(2);
+          expect(snap.plant_uri).toBe('plantURIlink.jpg');
+          expect(snap.height).toBe('8.50');
           expect(typeof snap.snapshot_id).toBe('number');
         });
     });
+
     test('status:400 - responds with bad request if missing required information', () => {
       return request(app)
         .post('/api/plants/2/snapshots')
@@ -102,6 +105,19 @@ describe('/api/plants/:plant_id/snapshots', () => {
           expect(msg).toBe('bad request');
         });
     });
+
+    test('status:400 - responds with bad request if missing required information', () => {
+      return request(app)
+        .post('/api/plants/2/snapshots')
+        .send({
+          height: 8.5,
+        })
+        .expect(400)
+        .then(({ body: { msg } }) => {
+          expect(msg).toBe('bad request');
+        });
+    });
+
     test('status:404 - responds with plant not found if plant does not exist', () => {
       return request(app)
         .post('/api/plants/1000/snapshots')
@@ -114,6 +130,7 @@ describe('/api/plants/:plant_id/snapshots', () => {
           expect(msg).toBe('plant not found');
         });
     });
+
     test('status:400 - responds with bad request if invalid plant_id', () => {
       return request(app)
         .post('/api/plants/notanumber/snapshots')
@@ -127,6 +144,7 @@ describe('/api/plants/:plant_id/snapshots', () => {
         });
     });
   });
+
   test('405: invalid method', () => {
     const invalidMethods = ['patch', 'put', 'delete'];
     const methodPromises = invalidMethods.map((method) => {
@@ -140,6 +158,7 @@ describe('/api/plants/:plant_id/snapshots', () => {
     return Promise.all(methodPromises);
   });
 });
+
 describe('/api/snapshots/:snapshot_id', () => {
   describe('DELETE', () => {
     test('status:204 - deletes snapshot', () => {
