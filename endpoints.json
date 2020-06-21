@@ -20,7 +20,7 @@
       ]
     }
   },
-  "GET /api/users/:user_id": {
+  "GET /api/users/:username": {
     "description": "serves a user",
     "queries": [],
     "example response": {
@@ -56,7 +56,7 @@
           "user_id": 1,
           "plant_type": "plant-type-1",
           "plant_variety": "plant-variety-1",
-          "pot_height": "10.00",
+          "pot_height": "10.0",
           "soil": "soil-1",
           "sunlight": "indirect",
           "location": "outside",
@@ -69,7 +69,7 @@
           "user_id": 2,
           "plant_type": "plant-type-2",
           "plant_variety": "plant-variety-2",
-          "pot_height": "20.00",
+          "pot_height": "20.0",
           "soil": "soil-2",
           "sunlight": "indirect",
           "location": "inside",
@@ -99,7 +99,7 @@
         "user_id": 1,
         "plant_type": "new-plant-type",
         "plant_variety": "new-plant-variety",
-        "pot_height": "12.50",
+        "pot_height": "12.5",
         "soil": "new-soil",
         "sunlight": "indirect",
         "location": "inside",
@@ -118,7 +118,7 @@
         "user_id": 1,
         "plant_type": "plant-type-1",
         "plant_variety": "plant-variety-1",
-        "pot_height": "10.00",
+        "pot_height": "10.0",
         "soil": "soil-1",
         "sunlight": "indirect",
         "location": "outside",
@@ -147,7 +147,7 @@
         "user_id": 1,
         "plant_type": "new-plant-type",
         "plant_variety": "new-plant-variety",
-        "pot_height": "12.50",
+        "pot_height": "12.5",
         "soil": "new-soil",
         "sunlight": "indirect",
         "location": "inside",
@@ -158,6 +158,49 @@
   },
   "DELETE /api/plants/:plant_id": {
     "description": "deletes a plant",
+    "queries": []
+  },
+  "GET /api/plants/:plant_id/snapshots": {
+    "description": "serves an array of snapshots",
+    "queries": [],
+    "example response": {
+      "snaps": [
+        {
+          "snapshot_id": 1,
+          "plant_id": 1,
+          "plant_uri": "https://plant_uri_1.jpg",
+          "height": "13.2",
+          "created_at": "2020-11-16T12:21:54.171Z"
+        },
+        {
+          "snapshot_id": 2,
+          "plant_id": 1,
+          "plant_uri": "https://plant_uri_2.jpg",
+          "height": "13.5",
+          "created_at": "2020-11-16T12:21:54.171Z"
+        }
+      ]
+    }
+  },
+  "POST /api/plants/:plant_id/snapshots": {
+    "description": "adds a snapshot",
+    "queries": [],
+    "example request": {
+      "plant_uri": "https://plant_uri.jpg",
+      "height": "13.2"
+    },
+    "example response": {
+      "snap": {
+        "snapshot_id": 1,
+        "plant_id": 1,
+        "plant_uri": "https://plant_uri_1.jpg",
+        "height": "13.2",
+        "created_at": "2020-11-16T12:21:54.171Z"
+      }
+    }
+  },
+  "DELETE /api/snapshots/:snapshot_id": {
+    "description": "deletes a snapshot",
     "queries": []
   }
 }
