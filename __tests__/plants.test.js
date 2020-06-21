@@ -186,7 +186,7 @@ describe('/api/users/:user_id/plants', () => {
           expect(plant.plant_name).toBe('plant-name-test');
           expect(plant.plant_type).toBe('vegetable');
           expect(plant.plant_variety).toBe('tomato');
-          expect(plant.pot_height).toBe('10.50');
+          expect(plant.pot_height).toBe('10.5');
           expect(plant.soil).toBe('soil-test');
           expect(plant.sunlight).toBe('indirect');
           expect(plant.location).toBe('inside');
@@ -288,7 +288,7 @@ describe('/api/plants/:plant_id', () => {
             ['soil', 'soil-test-change'],
             ['sunlight', 'direct'],
             ['plant_variety', 'tomato'],
-            ['pot_height', '10.50'],
+            ['pot_height', '10.5'],
             ['location', 'outside'],
             ['watering_freq', 'twice a day'],
             ['created_at', new Date(1416140514171).toISOString()],
@@ -314,7 +314,7 @@ describe('/api/plants/:plant_id', () => {
             ['location', 'inside'],
             ['watering_freq', 'twice a day'],
             ['plant_variety', 'tomato'],
-            ['pot_height', '15.50'],
+            ['pot_height', '15.5'],
             ['created_at', new Date(1416140514171).toISOString()],
           ]);
         });

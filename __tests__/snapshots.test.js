@@ -89,7 +89,7 @@ describe('/api/plants/:plant_id/snapshots', () => {
           expect(typeof snap).toBe('object');
           expect(snap.plant_id).toBe(2);
           expect(snap.plant_uri).toBe('plantURIlink.jpg');
-          expect(snap.height).toBe('8.50');
+          expect(snap.height).toBe('8.5');
           expect(typeof snap.snapshot_id).toBe('number');
         });
     });

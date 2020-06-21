@@ -8,7 +8,7 @@ exports.up = function (knex) {
       .references('plant_types.plant_type')
       .notNullable();
     plantsTable.string('plant_variety').notNullable();
-    plantsTable.decimal('pot_height').notNullable();
+    plantsTable.decimal('pot_height', 8, 1).notNullable();
     plantsTable.string('soil');
     plantsTable.string('sunlight').notNullable();
     plantsTable.string('location').notNullable();
