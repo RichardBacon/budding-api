@@ -167,13 +167,13 @@ const updatePlantById = (
     .modify((query) => {
       if (plant_name) query.update('plant_name', plant_name);
       if (plant_type) query.update('plant_type', plant_type);
-      if (soil) query.update('soil', soil);
       if (sunlight) query.update('sunlight', sunlight);
       if (location) query.update('location', location);
-      if (watering_freq) query.update('watering_freq', watering_freq);
       if (plant_variety) query.update('plant_variety', plant_variety);
       if (pot_height) query.update('pot_height', pot_height);
     })
+    .update('watering_freq', watering_freq || null)
+    .update('soil', soil || null)
     .where({ plant_id })
     .returning('*')
     .then((plants) => {
