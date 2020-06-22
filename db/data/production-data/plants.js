@@ -9,6 +9,18 @@ module.exports = [
     sunlight: 'direct',
     location: 'outside',
     watering_freq: 'once a week',
+    created_at: '2020-04-23T16:52:52+00:00',
+  },
+  {
+    plant_name: 'Monrosemary',
+    user_id: 1,
+    plant_type: 'herb',
+    plant_variety: 'rosemary',
+    pot_height: 10,
+    soil: 'all-purpose',
+    sunlight: 'direct',
+    location: 'outside',
+    watering_freq: 'twice a week',
     created_at: 1587660772,
   },
 ];
