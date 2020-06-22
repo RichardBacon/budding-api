@@ -2,7 +2,7 @@ module.exports = [
   {
     plant_name: 'Minty',
     user_id: 1,
-    plant_type: 'Herb',
+    plant_type: 'herb',
     plant_variety: 'mint',
     pot_height: 10,
     soil: 'all-purpose',
