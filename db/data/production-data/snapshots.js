@@ -41,4 +41,10 @@ module.exports = [
     height: 24,
     created_at: 1587660772,
   },
+  {
+    plant_id: 2,
+    plant_uri: '',
+    height: 24,
+    created_at: '2020-04-23T16:52:52+00:00',
+  },
 ];
