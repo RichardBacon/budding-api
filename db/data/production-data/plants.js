@@ -21,6 +21,6 @@ module.exports = [
     sunlight: 'direct',
     location: 'outside',
     watering_freq: 'twice a week',
-    created_at: 1587660772,
+    created_at: '2020-06-16T16:52:52+00:00',
   },
 ];
