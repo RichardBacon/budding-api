@@ -28,6 +28,7 @@ describe('/api/users/:user_id/plants', () => {
         .get('/api/users/1/plants')
         .expect(200)
         .then(({ body: { plants } }) => {
+          console.log(plants);
           expect(Array.isArray(plants)).toBe(true);
           expect(plants.length).toBe(2);
         });
