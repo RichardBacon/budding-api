@@ -12,7 +12,7 @@ module.exports = [
     created_at: '2020-04-23T16:52:52+00:00',
   },
   {
-    plant_name: 'Monrosemary',
+    plant_name: 'Rose',
     user_id: 1,
     plant_type: 'herb',
     plant_variety: 'Rosemary',
