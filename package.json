@@ -19,15 +19,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/richardjohnbacon/budding-back-end.git"
+    "url": "git+https://github.com/budding-team/budding-back-end.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/richardjohnbacon/budding-back-end/issues"
+    "url": "https://github.com/budding-team/budding-back-end/issues"
   },
-  "homepage": "https://github.com/richardjohnbacon/budding-back-end#readme",
+  "homepage": "https://github.com/budding-team/budding-back-end#readme",
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
