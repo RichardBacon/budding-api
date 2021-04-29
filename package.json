@@ -1,5 +1,5 @@
 {
-  "name": "budding-back-end",
+  "name": "budding-api",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -17,17 +17,9 @@
     "migrate-latest:prod": "NODE_ENV=production DB_URL=$(heroku config:get DATABASE_URL) knex migrate:latest",
     "migrate-rollback:prod": "NODE_ENV=production DB_URL=$(heroku config:get DATABASE_URL) knex migrate:rollback"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/budding-team/budding-back-end.git"
-  },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/budding-team/budding-back-end/issues"
-  },
-  "homepage": "https://github.com/budding-team/budding-back-end#readme",
+  "license": "MIT",
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
@@ -52,5 +44,13 @@
       "jest-extended",
       "jest-sorted"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RichardBacon/budding-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RichardBacon/budding-api/issues"
+  },
+  "homepage": "https://github.com/RichardBacon/budding-api#readme"
 }

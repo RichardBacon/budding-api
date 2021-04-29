@@ -1,20 +1,44 @@
 # Budding API
 
-[Budding API](https://budding-back-end.herokuapp.com/api)
+An API for Budding, a mobile app that helps horticulturists to keep track of their plants and measure their progress as they grow.
 
-An API to serve endpoints to the [Budding App](https://github.com/budding-team/budding-front-end)
+The project was created by Stephanie Thornley, ([thorners55](https://github.com/thorners55)),
+Zach Pinfold ([ZachPinfold](https://github.com/ZachPinfold)),
+Joao Mak ([joao-mak](https://github.com/joao-mak)) and
+Richard Bacon ([RichardBacon](https://github.com/RichardBacon)) during the [Northcoders](https://northcoders.com/) coding bootcamp.
+
+For more information about our approach and a demonstration of the app, see our Northcoders graduation presentation: [budding | Northcoders Graduation Showcase](https://www.youtube.com/watch?v=llKXad2gF8c).
+
+The hosted API: [Budding API](https://budding-api.herokuapp.com/api).
+
+The repo for the frontend mobile app: [Budding](https://github.com/RichardBacon/budding).
+
+## Development
+
+### Technical Features
+
+- A backend RESTful API built on Node with Express, using an MVC architecture.
+
+- CRUD operations performed on a PostgreSQL database using Knex.
+
+#### Dev Tools
+
+- Code formatting with Prettier.
+
+- Linting with ESLint.
+
+- Test-driven development with Jest and Supertest.
 
 ## Getting Started
 
 ```bash
-git clone https://github.com/budding-team/budding-back-end.git
+git clone https://github.com/RichardBacon/budding-api.git
 ```
 
 ### Prerequisites
 
 ```
 node v12
-npm v6.14.5
 postgresql v12.2
 ```
 
@@ -34,7 +58,6 @@ Add a knexfile.js in the root directory
 // knexfile.js
 
 const ENV = process.env.NODE_ENV || 'development';
-const { DB_URL } = process.env;
 
 const baseConfig = {
   client: 'pg',
@@ -49,14 +72,14 @@ const baseConfig = {
 const customConfig = {
   development: {
     connection: {
-      database: 'nc_news',
+      database: 'budding',
       // user,
       // password
     },
   },
   test: {
     connection: {
-      database: 'nc_news_test',
+      database: 'budding_test',
       // user,
       // password
     },
@@ -93,15 +116,20 @@ npm test
 
 ## Built With
 
-- [express](https://expressjs.com/)
-- [jest](https://jestjs.io/)
-- [knex](http://knexjs.org/)
-- [node-postgres](https://node-postgres.com/)
-- [supertest](https://github.com/visionmedia/supertest)
+- [Express](https://expressjs.com/)
+- [Jest](https://jestjs.io/)
+- [Knex](http://knexjs.org/)
+- [Node](https://nodejs.org/en/)
+- [Node Postgres](https://node-postgres.com/)
+- [Supertest](https://github.com/visionmedia/supertest)
 
 ## Authors
 
 - **Stephanie Thornley** - [thorners55](https://github.com/thorners55)
 - **Zach Pinfold** - [ZachPinfold](https://github.com/ZachPinfold)
 - **Joao Mak** - [joao-mak](https://github.com/joao-mak)
-- **Richard Bacon** - [richardjohnbacon](https://github.com/richardjohnbacon)
+- **Richard Bacon** - [RichardBacon](https://github.com/RichardBacon)
+
+## License
+
+This project is licensed under the MIT License, see the [LICENSE](LICENSE) file for details.
